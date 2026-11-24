@@ -1,0 +1,62 @@
+{
+  "enabled": true,
+  "note": "Daily News tab sources. Set \"enabled\" to false to pause the News tab. Edit \"blocklist\" to hide stories that contain a word or phrase (a * at the end matches any ending). Words with a capital letter, like POGO or AI, only match that exact capitalization. \"shoppingTitles\" drops deal and coupon posts by their title.",
+  "limits": { "days": 7, "perSource": 6, "total": 60, "minPH": 8, "labUpdates": 5 },
+  "blocklist": [
+    "sex", "sexual", "sexually", "sext*", "porn*", "nude", "nudes", "nudity", "explicit images", "rape*", "molest*", "CSAM", "child abuse", "onlyfans",
+    "murder*", "massacre*", "behead*", "decapitat*", "mass shooting", "gunman", "gunmen", "stabbing", "stabbed", "gore", "gory", "torture*", "dismember*", "corpse*", "graphic violence", "mutilat*",
+    "suicide*", "suicidal", "self-harm", "self harm", "kill himself", "kill herself", "kill themselves", "killed himself", "killed herself", "took his own life", "took her own life",
+    "gambling", "casino*", "sports betting", "online betting", "betting app*", "betting site*", "sportsbook*", "sabong", "e-sabong", "jueteng", "POGO", "POGOs", "online bet*", "lottery jackpot",
+    "cocaine", "heroin", "meth", "methamphetamine", "shabu", "marijuana", "cannabis", "fentanyl", "narcotic*", "drug trafficking", "drug lord*", "overdose*", "vape*", "vaping",
+    "affair", "two affairs", "multiple affairs", "extramarital", "mistress", "infidelity"
+  ],
+  "sponsoredMarkers": ["Sponsored", "Partner content", "Advertorial", "Promoted"],
+  "shoppingTitles": ["promo code*", "coupon*", "deals", "gift ideas", "gift guide", "Black Friday", "Cyber Monday", "best buys"],
+  "topicKeywords": {
+    "ai": ["AI", "A.I.", "artificial intelligence", "machine learning", "deep learning", "neural network*", "chatbot*", "LLM", "LLMs", "large language model*", "generative", "GenAI", "deepfake*", "Gemini", "Claude", "ChatGPT", "GPT-*", "OpenAI", "Anthropic", "DeepMind", "Grok", "xAI", "Llama", "Copilot", "Mistral", "Qwen", "DeepSeek", "Nvidia", "AI-powered", "AI-generated"],
+    "cyber": ["hack", "hacks", "hacked", "hacker*", "hacking", "breach*", "scam*", "phishing", "smishing", "vishing", "malware", "ransomware", "spyware", "trojan", "botnet*", "vulnerabilit*", "zero-day", "exploit*", "security patch*", "security update*", "CVE-*", "CISA", "cybercrime*", "cybersecurity", "cyber", "cyberattack*", "data privacy", "data leak*", "leaked data", "NPC", "National Privacy Commission", "CICC", "fraud*", "identity theft", "SIM registration", "password*", "passkey*", "2FA", "two-factor", "encryption", "infostealer*", "DDoS"],
+    "it": ["Wi-Fi", "WiFi", "internet", "5G", "broadband", "fiber internet", "fibre broadband", "fiber-optic*", "fibre-optic*", "fiber optic*", "smartphone*", "phone*", "iPhone*", "Android", "iOS", "Windows", "Linux", "laptop*", "PC", "PCs", "chip", "chips", "chipmaker*", "semiconductor*", "processor*", "cloud computing", "cloud service*", "cloud storage", "data center*", "data centre*", "datacenter*", "software update*", "app", "apps", "DICT", "telco*", "Starlink", "satellite internet", "outage*", "server*", "open source", "open-source", "programming", "coding", "software", "computer*", "gadget*", "tablet*", "browser*", "Google", "Apple", "Microsoft", "Meta", "Samsung", "TikTok", "YouTube", "Facebook"]
+  },
+  "labs": {
+    "openai": { "name": "OpenAI", "home": "https://openai.com/news/", "match": ["OpenAI", "ChatGPT", "Sora"] },
+    "google": { "name": "Google DeepMind & Google AI", "home": "https://deepmind.google/blog/", "match": ["DeepMind", "Gemini", "Google AI"] },
+    "anthropic": { "name": "Anthropic", "home": "https://www.anthropic.com/news", "match": ["Anthropic", "Claude"] },
+    "nvidia": { "name": "NVIDIA", "home": "https://blogs.nvidia.com/", "match": ["Nvidia", "NVIDIA"] },
+    "meta": { "name": "Meta AI", "home": "https://ai.meta.com/blog/", "match": ["Meta AI", "Llama", "Meta's AI", "Meta Superintelligence"] },
+    "microsoft": { "name": "Microsoft AI", "home": "https://microsoft.ai/news/", "match": ["Microsoft AI", "Copilot"] },
+    "xai": { "name": "xAI (SpaceX AI)", "home": "https://x.ai/news", "match": ["xAI", "Grok"] },
+    "mistral": { "name": "Mistral AI", "home": "https://mistral.ai/news/", "match": ["Mistral"] }
+  },
+  "sources": [
+    { "id": "gma-scitech", "name": "GMA News SciTech", "homepage": "https://www.gmanetwork.com/news/scitech/", "feed": "https://data.gmanetwork.com/gno/rss/scitech/feed.xml", "region": "PH", "kind": "news", "filterTech": true },
+    { "id": "inquirer-tech", "name": "Inquirer Technology", "homepage": "https://technology.inquirer.net/", "feed": "https://technology.inquirer.net/feed", "region": "PH", "kind": "news", "defaultTopics": ["it"], "feedOffset": "+08:00" },
+    { "id": "rappler-tech", "name": "Rappler Technology", "homepage": "https://www.rappler.com/technology/", "feed": "https://www.rappler.com/technology/feed/", "region": "PH", "kind": "news", "defaultTopics": ["it"] },
+    { "id": "cna-tech", "name": "CNA Business & Tech", "homepage": "https://www.channelnewsasia.com/business", "feed": "https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6936", "region": "Asia", "kind": "news", "filterTech": true },
+    { "id": "scmp-tech", "name": "South China Morning Post Tech", "homepage": "https://www.scmp.com/tech", "feed": "https://www.scmp.com/rss/36/feed/", "region": "Asia", "kind": "news", "defaultTopics": ["it"] },
+    { "id": "restofworld", "name": "Rest of World", "homepage": "https://restofworld.org/", "feed": "https://restofworld.org/feed/latest/", "region": "Asia", "kind": "news", "filterTech": true },
+    { "id": "ars", "name": "Ars Technica", "homepage": "https://arstechnica.com/", "feed": "https://arstechnica.com/feed/", "region": "US", "kind": "news", "filterTech": true },
+    { "id": "verge", "name": "The Verge", "homepage": "https://www.theverge.com/", "feed": "https://www.theverge.com/rss/index.xml", "region": "US", "kind": "news", "filterTech": true },
+    { "id": "techcrunch", "name": "TechCrunch", "homepage": "https://techcrunch.com/", "feed": "https://techcrunch.com/feed/", "region": "US", "kind": "news", "defaultTopics": ["it"] },
+    { "id": "wired", "name": "Wired", "homepage": "https://www.wired.com/", "feed": "https://www.wired.com/feed/rss", "region": "US", "kind": "news", "filterTech": true },
+    { "id": "mittr-ai", "name": "MIT Technology Review (AI)", "homepage": "https://www.technologyreview.com/topic/artificial-intelligence/", "feed": "https://www.technologyreview.com/topic/artificial-intelligence/feed", "region": "US", "kind": "news", "defaultTopics": ["ai"] },
+    { "id": "cisa", "name": "CISA Cybersecurity Advisories", "homepage": "https://www.cisa.gov/news-events/cybersecurity-advisories", "feed": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "region": "US", "kind": "news", "defaultTopics": ["cyber"] },
+    { "id": "therecord", "name": "The Record by Recorded Future", "homepage": "https://therecord.media/", "feed": "https://therecord.media/feed", "region": "US", "kind": "news", "defaultTopics": ["cyber"] },
+    { "id": "krebs", "name": "Krebs on Security", "homepage": "https://krebsonsecurity.com/", "feed": "https://krebsonsecurity.com/feed/", "region": "US", "kind": "news", "defaultTopics": ["cyber"] },
+    { "id": "bleepingcomputer", "name": "BleepingComputer", "homepage": "https://www.bleepingcomputer.com/", "feed": "https://www.bleepingcomputer.com/feed/", "region": "US", "kind": "news", "defaultTopics": ["cyber"] },
+    { "id": "bbc-tech", "name": "BBC Technology", "homepage": "https://www.bbc.com/news/technology", "feed": "https://feeds.bbci.co.uk/news/technology/rss.xml", "region": "Europe", "kind": "news", "defaultTopics": ["it"] },
+    { "id": "guardian-tech", "name": "The Guardian Technology", "homepage": "https://www.theguardian.com/technology", "feed": "https://www.theguardian.com/uk/technology/rss", "region": "Europe", "kind": "news", "filterTech": true },
+    { "id": "register", "name": "The Register", "homepage": "https://www.theregister.com/", "feed": "https://www.theregister.com/headlines.atom", "region": "Europe", "kind": "news", "defaultTopics": ["it"] },
+    { "id": "euronews-next", "name": "Euronews Next", "homepage": "https://www.euronews.com/next", "feed": "https://www.euronews.com/rss?level=vertical&name=next", "region": "Europe", "kind": "news", "filterTech": true },
+    { "id": "enisa", "name": "ENISA News", "homepage": "https://www.enisa.europa.eu/news", "page": "https://www.enisa.europa.eu/news", "parser": "enisa", "region": "Europe", "kind": "news", "defaultTopics": ["cyber"] },
+
+    { "id": "openai", "name": "OpenAI News", "homepage": "https://openai.com/news/", "feed": "https://openai.com/news/rss.xml", "region": "US", "kind": "lab", "lab": "openai" },
+    { "id": "deepmind", "name": "Google DeepMind Blog", "homepage": "https://deepmind.google/blog/", "feed": "https://deepmind.google/blog/rss.xml", "region": "Europe", "kind": "lab", "lab": "google" },
+    { "id": "google-ai", "name": "Google AI Blog", "homepage": "https://blog.google/innovation-and-ai/technology/ai/", "feed": "https://blog.google/innovation-and-ai/technology/ai/rss/", "region": "US", "kind": "lab", "lab": "google" },
+    { "id": "anthropic", "name": "Anthropic News", "homepage": "https://www.anthropic.com/news", "page": "https://www.anthropic.com/news", "parser": "anthropic", "region": "US", "kind": "lab", "lab": "anthropic" },
+    { "id": "nvidia", "name": "NVIDIA Blog", "homepage": "https://blogs.nvidia.com/", "feed": "https://blogs.nvidia.com/feed/", "region": "US", "kind": "lab", "lab": "nvidia" },
+    { "id": "meta-ai", "name": "Meta AI Blog", "homepage": "https://ai.meta.com/blog/", "page": "https://ai.meta.com/blog/", "parser": "metaai", "region": "US", "kind": "lab", "lab": "meta" },
+    { "id": "microsoft-ai", "name": "Microsoft AI News", "homepage": "https://microsoft.ai/news/", "page": "https://microsoft.ai/news/", "parser": "microsoftai", "region": "US", "kind": "lab", "lab": "microsoft" },
+    { "id": "xai", "name": "xAI News", "homepage": "https://x.ai/news", "page": "https://x.ai/news", "parser": "xai", "region": "US", "kind": "lab", "lab": "xai" },
+    { "id": "mistral", "name": "Mistral AI News", "homepage": "https://mistral.ai/news/", "feed": "https://mistral.ai/news/rss", "region": "Europe", "kind": "lab", "lab": "mistral" }
+  ]
+}

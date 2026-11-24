@@ -1,0 +1,80 @@
+# Daily News refresh for Red Arrow Hub.
+# Runs at 21:00 UTC (5:00 AM Philippine time) and from the Actions tab ("Run workflow").
+# It fetches the sources in news-sources.json on GitHub's servers, writes news.json,
+# commits it to main, then asks GitHub Pages to rebuild. Students' phones only ever load
+# news.json from this site, never from the news sites.
+name: Daily news
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch news
+        run: node scripts/fetch-news.mjs
+
+      - name: Check news.json (schema and 80 KB limit)
+        run: node scripts/validate-news.mjs news.json
+
+      - name: Commit news.json if it changed
+        id: commit
+        run: |
+          if git diff --quiet -- news.json && git ls-files --error-unmatch news.json >/dev/null 2>&1; then
+            echo "news.json did not change."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news.json
+          git commit -m "News refresh $(date -u +%Y-%m-%d)"
+          # If someone pushed while we were fetching, put our commit on top (never force-push).
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Ask GitHub Pages to rebuild
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Pushes made with GITHUB_TOKEN may not start a Pages build, so request one.
+          # (This endpoint works when Pages is set to "Deploy from a branch".)
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "::warning::Could not request a Pages build. Check Settings > Pages."
+
+      - name: Confirm the live site shows the new news.json
+        if: steps.commit.outputs.pushed == 'true'
+        run: |
+          want=$(node -p "require('./news.json').generated")
+          owner="${{ github.repository_owner }}"; repo="${{ github.event.repository.name }}"
+          url="https://${owner,,}.github.io/${repo}/news.json"
+          for i in $(seq 1 20); do
+            got=$(curl -fsSL -H "Cache-Control: no-cache" "${url}?t=$(date +%s)" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{try{console.log(JSON.parse(s).generated)}catch(e){console.log('')}})" || true)
+            if [ "$got" = "$want" ]; then echo "Live site updated: generated=$got"; exit 0; fi
+            echo "Waiting for Pages (live: ${got:-none}, want: $want)…"; sleep 30
+          done
+          echo "::warning::The live site did not show the new news.json within 10 minutes. Check the pages-build-deployment run in the Actions tab."

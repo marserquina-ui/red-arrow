@@ -1,5 +1,5 @@
 /* Offline cache for the Red Arrow static site (GitHub Pages at /red-arrow/). */
-const CACHE = "red-arrow-hub-v24";
+const CACHE = "red-arrow-hub-v25";
 const ASSETS = [
 "./",
 "./art/alert-panel.svg",
@@ -88,6 +88,9 @@ const ASSETS = [
 "./art/router.svg",
 "./ask.html",
 "./careers.html",
+"./news.html",
+"./news-page.js",
+"./art/icons/news.svg",
 "./careers.js",
 "./careers-interview.js",
 "./art/icons/careers.svg",
@@ -137,6 +140,26 @@ self.addEventListener("activate", function (event) {
 self.addEventListener("fetch", function (event) {
   var req = event.request;
   if (req.method !== "GET") return;
+  /* news.json only: network first (today's news when online), cached copy when offline.
+     The offline copy is marked with x-ra-offline so the News page can say so. Never precached. */
+  if (new URL(req.url).pathname.endsWith("/news.json")) {
+    event.respondWith(
+      fetch(req, { cache: "no-store" }).then(function (res) {
+        if (res && res.ok && res.type === "basic") {
+          var copy = res.clone();
+          caches.open(CACHE).then(function (cache) { cache.put("./news.json", copy); });
+        }
+        return res;
+      }).catch(function () {
+        return caches.match("./news.json").then(function (c) {
+          if (!c) return new Response("null", { status: 503, headers: { "Content-Type": "application/json", "x-ra-offline": "1" } });
+          var hd = new Headers(c.headers); hd.set("x-ra-offline", "1");
+          return c.blob().then(function (b) { return new Response(b, { status: 200, headers: hd }); });
+        });
+      })
+    );
+    return;
+  }
   event.respondWith(
     caches.match(req, { ignoreSearch: true }).then(function (cached) {
       var net = fetch(req).then(function (res) {

@@ -1,0 +1,163 @@
+<!doctype html><html><body>
+lback></div>
+
+      
+      
+
+              <div>
+          <h2>Featured news</h2>
+          <div><div>
+  
+    
+      
+      <div>
+          <div><div><a href="/news/enisa-reveals-the-state-of-cybersecurity-in-the-union"><article>
+  
+      
+            <div>  
+
+
+</div>
+      
+  </article>
+</a></div>
+<div>
+	<h3><a href="/news/enisa-reveals-the-state-of-cybersecurity-in-the-union" hreflang="en">ENISA reveals the State of Cybersecurity in the Union</a></h3>
+	<p>
+<span>Press Release</span>
+		<span><time datetime="2026-11-10T13:03:04+02:00" title="10 November 2026 - 13:03">10 Nov 2026</time>
+</span>
+	</p>
+	<div><p>As the cyber ecosystem is in flux, the 2026 edition of the biennial report introduces a ‘strategic compass’,…</div>
+	<div>
+		<div><ul><li><a href="/topics/state-of-cybersecurity-in-the-eu" hreflang="en">State of cybersecurity in the EU</a></li></ul></div>
+		<a href="/audience/national-eu-authorities">National/Authorities</a>
+
+	</div>
+</div></div>
+    <div><div><a href="/news/exploring-the-evolution-of-the-cyber-threat-landscape-how-dependencies-weaken-our-digital-resilience"><article>
+  
+      
+            <div>  
+
+
+</div>
+      
+  </article>
+</a></div>
+<div>
+	<h3><a href="/news/exploring-the-evolution-of-the-cyber-threat-landscape-how-dependencies-weaken-our-digital-resilience" hreflang="en">Exploring the evolution of the cyber threat landscape: How dependencies weaken our digital resilience</a></h3>
+	<p>
+<span>Press Release</span>
+		<span><time datetime="2026-09-22T13:02:45+03:00" title="22 September 2026 - 13:02">22 Sep 2026</time>
+</span>
+	</p>
+	<div><p>The 2026 ENISA Threat Landscape confirms that cyber dependencies expand the attack surface and require a new level…</div>
+	<div>
+		<div><ul><li><a href="/topics/cyber-threats" hreflang="en">Cyber Threats</a></li></ul></div>
+		<a href="/audience/national-eu-authorities">National/Authorities</a>
+<a href="/audience/private-sector">Private Sector</a>
+
+	</div>
+</div></div>
+    <div><div><a href="/news/the-cra-single-reporting-platform-is-launched"><article>
+  
+      
+            <div>  
+
+
+</div>
+      
+  </article>
+</a></div>
+<div>
+	<h3><a href="/news/the-cra-single-reporting-platform-is-launched" hreflang="en">The CRA Single Reporting Platform is launched</a></h3>
+	<p>
+<span>Press Release</span>
+		<span><time datetime="2026-09-11T14:00:26+03:00" title="11 September 2026 - 14:00">11 Sep 2026</time>
+</span>
+	</p>
+	<div><p>The EU Agency for Cybersecurity (ENISA) has deployed the initial operating capability of the Single Reporting…</div>
+	<div>
+		<div><ul><li><a href="/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp" hreflang="en">Single Reporting Platform (SRP)</a></li></ul></div>
+		<a href="/audience/national-eu-authorities">National/Authorities</a>
+<a href="/audience/private-sector">Private Sector</a>
+
+	</div>
+</div></div>
+    <div><div><a href="/news/enisa-on-air-our-first-podcast-launches-on-frontier-ai"><article>
+  
+      
+            <div>  
+
+
+</div>
+      
+  </article>
+</a></div>
+<div>
+	<h3><a href="/news/enisa-on-air-our-first-podcast-launches-on-frontier-ai" hreflang="en">ENISA on Air: Our first podcast launches on Frontier AI</a></h3>
+	<p>
+<span>News Item</span>
+		<span><time datetime="2026-07-14T12:10:58+03:00" title="14 July 2026 - 12:10">14 Jul 2026</time>
+</span>
+	</p>
+	<div><p>ENISA launches a podcast series to decrypt the latest cybersecurity developments and discuss issues that shape…</div>
+	<div>
+		
+		<a href="/audience/citizens">Citizens</a>
+<a href="/audience/national-eu-authorities">National/Authorities</a>
+<a href="/audience/private-sector">Private Sector</a>
+
+	</div>
+</div></div>
+
+    </div>
+  
+            <div>
+      
+    </div>
+  </div>
+</div>
+
+        </div>
+      
+      <div>
+        <h2>All news</h2>
+                  <div>
+              <div>
+    <div>
+  
+    
+        <div>
+      <h3>By Topics</h3><ul><li><a href="/news?f%5B0%5D=topics%3A530" rel="nofollow"><span>Artificial Intelligence and Next Gen Technologies</span>
+  <span>(5)</span>
+</a></li><li><a href="/news?f%5B0%5D=topics%3A524" rel="nofollow"><span>Awareness and Cyber Hygiene</span>
+  <span>(9)</span>
+</a><div>
+    <ul><li><a href="/news?f%5B0%5D=topics%3A1287" rel="nofollow"><span>Raising Awareness (Campaigns)</span>
+  <span>(3)</span>
+</a></li></ul>
+</div>
+</li><li><a href="/news?f%5B0%5D=topics%3A525" rel="nofollow"><span>Certification and Standards</span>
+  <span>(13)</span>
+</a></li><li><a href="/news?f%5B0%5D=topics%3A534" rel="nofollow"><span>Cyber Hygiene</span>
+  <span>(9)</span>
+</a><div>
+    <ul><li><a href="/news?f%5B0%5D=topics%3A1318" rel="nofollow"><span>European Cybersecurity Month</span>
+  <span>(2)</span>
+</a></li></ul>
+</div>
+</li><li><a href="/news?f%5B0%5D=topics%3A1281" rel="nofollow"><span>Cyber Incident Awareness</span>
+  <span>(1)</span>
+</a></li><li><a href="/news?f%5B0%5D=topics%3A528" rel="nofollow"><span>Cybersecurity of Critical Sectors</span>
+  <span>(30)</span>
+</a><div>
+    <ul><li><a href="/news?f%5B0%5D=topics%3A1307" rel="nofollow"><span>Information Sharing and Analysis Centers (ISACs)</span>
+  <span>(2)</span>
+</a></li></ul>
+</div>
+</li><li><a href="/news?f%5B0%5D=topics%3A526" rel="nofollow"><span>Cyber Threats</span>
+  <span>(15)</span>
+</a></li><
+</body></html>

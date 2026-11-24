@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Test feed (made-up items)</title>
+<item><title>New casino app scam targets students</title><link>https://news.example.com/a1</link><pubDate>Tue, 24 Nov 2026 01:00:00 +0000</pubDate><description>Made-up item for the blocklist test.</description></item>
+<item><title>Online betting sites hit by malware wave</title><link>https://news.example.com/a2</link><pubDate>Tue, 24 Nov 2026 02:00:00 +0000</pubDate><description>Made-up item for the blocklist test.</description></item>
+<item><title>Phishing texts pretend to be your bank</title><link>https://news.example.com/a3?utm_source=rss&amp;utm_medium=feed</link><pubDate>Tue, 24 Nov 2026 03:00:00 +0000</pubDate><description>&lt;p&gt;Made-up item. &lt;img src="https://news.example.com/x.jpg"&gt; &amp;quot;Don't click&amp;quot; links in texts.&lt;/p&gt;</description></item>
+<item><title>Phishing texts pretend to be your bank</title><link>https://www.news.example.com/a3/</link><pubDate>Tue, 24 Nov 2026 04:00:00 +0000</pubDate><description>Same story, same link with a different form.</description></item>
+<item><title>Phishing texts pretend to be your bank, police say</title><link>https://other.example.org/b9</link><pubDate>Tue, 24 Nov 2026 05:00:00 +0000</pubDate><description>Near-identical title from another site.</description></item>
+<item><title>Students build a weather app</title><link>https://news.example.com/a4</link><pubDate>Tue, 24 Nov 2026 06:00:00 +0000</pubDate><description>Gambling? No. This one is fine; the word is only in the excerpt test below.</description></item>
+</channel></rss>

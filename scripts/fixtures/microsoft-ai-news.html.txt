@@ -1,0 +1,161 @@
+<!doctype html><html><body>
+section
+ 
+  
+>
+
+      <scroll-object>
+              <h1>
+          <split-text by="lines"><i>Stories. Research. Perspectives</i>.</split-text>
+        </h1>
+      
+      
+          </scroll-object>
+  
+</section>
+
+<div
+
+
+		
+			
+	
+
+></div>
+
+
+<section data-articles data-hero-gradient-continuation>
+    <div data-articles-grid>
+                <article data-article-featured>
+        <a href="https://microsoft.ai/news/rl-infrastructure-at-microsoft-ai/">
+                      <span>
+              
+            </span>
+                    <h2>
+            RL infrastructure at Microsoft AI          </h2>
+        </a>
+                <div>
+          <time datetime="2026-11-23T12:24:32-05:00">
+            November 23, 2026          </time>
+          <a href="https://microsoft.ai/news/rl-infrastructure-at-microsoft-ai/"            aria-label="Continue reading: RL infrastructure at Microsoft AI"
+           >
+            <span>Continue reading</span>
+          </a>
+        </div>
+      </article>
+    
+          <div data-articles-compact>
+                            <article data-article-compact>
+            <a href="https://microsoft.ai/news/microsoft-ignite-2026/">
+                              <span>
+                  
+                </span>
+                            <h2>
+                Seven new world-class models at scalable price-performance              </h2>
+            </a>
+            <time datetime="2026-11-17T13:16:05-05:00">
+              November 17, 2026            </time>
+          </article>
+                            <article data-article-compact>
+            <a href="https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/">
+                              <span>
+                  
+                </span>
+                            <h2>
+                MAI Code 2 and Code 2 Flash: Everyday coding at scalable prices              </h2>
+            </a>
+            <time datetime="2026-11-17T13:15:16-05:00">
+              November 17, 2026            </time>
+          </article>
+                            <article data-article-compact>
+            <a href="https://microsoft.ai/news/introducing-mai-cyber-2-flash/">
+                              <span>
+                  
+                </span>
+                            <h2>
+                MAI Cyber 2 Flash: Leading security. Lower cost              </h2>
+            </a>
+            <time datetime="2026-11-17T13:15:34-05:00">
+              November 17, 2026            </time>
+          </article>
+              </div>
+      </div>
+</section>
+
+<div
+
+
+		
+			
+	
+
+></div>
+
+
+<block-news data-block-component data-news-listing
+ >
+  <div>
+    
+    <form data-news-form role="search" aria-label="Search news" method="get" action="/blog/"
+     >
+      <div data-news-persistent hidden>
+                <input type="hidden" name="discipline" value="featured" />
+      </div>
+      <nav data-news-tabs aria-label="News categories"
+       >
+                  <a data-news-link href="/blog/?discipline=featured&#038;sort=desc"
+            aria-current="true"           >
+            Featured          </a>
+                  <a data-news-link href="/blog/?discipline=models&#038;sort=desc"
+                       >
+            Models          </a>
+                  <a data-news-link href="/blog/?discipline=research&#038;sort=desc"
+                       >
+            Research          </a>
+                  <a data-news-link href="/blog/?discipline=health&#038;sort=desc"
+                       >
+            Health          </a>
+                  <a data-news-link href="/blog/?discipline=announcements&#038;sort=desc"
+                       >
+            Announcements          </a>
+                  <a data-news-link href="/blog/?discipline=perspectives&#038;sort=desc"
+                       >
+            Perspectives          </a>
+              </nav>
+      <div>
+        <details data-news-sort>
+          <summary>
+            Sort            
+          </summary>
+          <fieldset>
+            <legend>Sort news</legend>
+                          <label>
+                <input type="radio" name="sort" value="desc"  checked='checked'                  />
+                Newest first              </label>
+                          <label>
+                <input type="radio" name="sort" value="asc"                   />
+                Oldest first              </label>
+                      </fieldset>
+        </details>
+        <div>
+          <label for="block_0abbc84c3b1dea6f1f69481903ae6a43-search">Search news</label>
+          <input type="search" name="news_search" value="" maxlength="200"
+            placeholder="Search"
+            />
+          <button type="submit" aria-label="Search news">
+            
+          </button>
+        </div>
+      </div>
+    </form>
+    <p data-news-loading role="status" hidden>Loading news.</p>
+    <p data-news-error role="alert" hidden>
+      News could not be loaded. Your previous results are still shown.      <a data-news-retry>Try loading the page again.</a>
+    </p>
+    <p data-news-summary role="status" aria-live="polite" aria-atomic="true">
+      11 articles. Page 1 of 2.    </p>
+    <div data-news-results>
+                    <div data-news-grid>
+                                  <article data-news-card
+         
+</body></html>
