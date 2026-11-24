@@ -459,7 +459,7 @@ html[data-theme="dark"] .overlay a.btn-outline.help-outline,html[data-theme="dar
 html[data-theme="dark"] .about-link{color:var(--teal-text)}
 /* Footer stays a cream surface in every theme, so the footer link stays dark rust. */
 .site-footer .about-link,html[data-theme="dark"] .site-footer .about-link{color:#7a160f}
-.about-page h2{margin:1.2rem 0 .35rem;font-size:1.15rem}
+.about-page h2{margin:0 0 .6rem;font-size:1.3rem;font-weight:800;letter-spacing:-.01em}.home-page section p,.home-page section li{font-size:.97rem}.home-page section>p,.hm-card p,.hm-help p{color:var(--muted)}
 .about-page p,.about-page li{max-width:40rem;overflow-wrap:anywhere}
 .about-devices{margin:.4rem 0 1rem;padding-left:1.2rem}
 .about-page .unverified-note{margin:.4rem 0 1rem}
@@ -507,18 +507,23 @@ html[data-theme="dark"] .cr-safety{border-color:var(--muted)}
 .deep-show{position:fixed;inset:0;z-index:60;background:var(--paper,#fff);display:flex;align-items:center;justify-content:center;padding:1rem}
 .deep-show-in{max-width:40rem;width:100%}.deep-show-t{font-size:1.4rem;white-space:pre-wrap;color:var(--ink)}
 .deep-help p{margin:.4rem 0}
-.home-hero{background:#0e1730;color:#eef2f8;border-radius:16px;padding:16px 16px 20px;margin:0 0 1.5rem}
-.home-hero h1{color:#eef2f8;margin:.6rem 0 .25rem;font-size:clamp(1.5rem,5vw,2.1rem);letter-spacing:-.02em}
-.home-hero p{color:#cbd5e1;margin:0 0 .5rem;max-width:36rem}
-.home-map{display:block;width:100%;height:auto;max-height:240px;object-fit:contain}
-.home-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1rem}
-.home-help-link{background:none;border:0;color:#5eead4;font:inherit;font-weight:700;text-decoration:underline;min-height:48px;cursor:pointer;padding:0}
-.home-mission{border-left:6px solid var(--red);padding:.25rem 0 .25rem 1rem;margin:0 0 1.75rem}
+/* v28 Home hero: full-bleed map fading into the page; heading overlaps its bottom edge */
+.hm-hero{margin:0 0 2rem}.hm-banner{position:relative;margin:0 -1rem;background:#05070d;overflow:hidden}
+.hm-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%,var(--bg) 72%)}
+.home-map{display:block;width:100%;height:clamp(170px,44vw,300px);object-fit:cover}
+.hm-hero-text{position:relative;z-index:1;margin-top:-2.5rem}.hm-eyebrow{margin:0 0 .4rem;font-size:.78rem!important;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--kicker)!important}
+.hm-hero h1{margin:0 0 .6rem;font-size:clamp(1.65rem,6.4vw,2.5rem);line-height:1.15;font-weight:800;letter-spacing:-.02em;max-width:34rem}.hm-lead{margin:0 0 1.1rem;max-width:36rem}
+.hm-actions{display:flex;flex-wrap:wrap;gap:.6rem}.hm-actions .btn{min-height:48px;justify-content:center}.hm-stats{list-style:none;padding:0;margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem}
+.hm-stat{padding:.35rem .8rem;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:.85rem!important;font-weight:700}
+.hm-mission{margin:0 0 2rem}.hm-mission .mission-text{font-size:1.05rem;line-height:1.55}.hm-card{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}.hm-card h3,.hm-card p{margin:0}
+.hm-ic{width:56px;height:56px;object-fit:cover;object-position:60% 50%;border-radius:12px;border:1px solid var(--line);background:#f4efe8}
+.hm-help{margin:0 0 2rem;padding:1.1rem}.hm-help p{margin:0 0 .75rem}
+@media (max-width:600px){.hm-actions .btn{flex:1 1 100%}}@media (min-width:768px){.hm-banner{margin:0;border-radius:16px 16px 0 0}}
 .mission-text{font-size:1.15rem;line-height:1.55;margin:0 0 .75rem;max-width:40rem}
 .trust-list{list-style:none;padding:0;margin:0;display:grid;gap:.4rem}
 .trust-list li{padding-left:1.5rem;position:relative}
 .trust-list li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
-.home-courses,.home-steps,.home-next,.home-staff{margin:0 0 1.75rem}
+.home-courses,.home-steps,.home-next,.home-staff{margin:0 0 2rem}
 .home-course,.home-next .card{margin:0 0 .75rem}
 .home-course a:not(.btn),.home-steps a{display:inline-flex;align-items:center;min-height:48px;font-weight:700}
 .home-steps ol{padding-left:0;list-style:none;display:grid;gap:.6rem}

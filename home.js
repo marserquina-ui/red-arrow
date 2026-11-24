@@ -7,15 +7,23 @@ function render(m,A){var h=A.h,T=A.T,ico=A.ico,teacherCard=A.teacherCard,D=A.D,f
  function firstLesson(id,fb){var mod=modOf(id),it=mod&&mod.items&&mod.items[0];return it&&it.type==="lesson"&&it.id?it.id:fb}
  function list(cls,items){var ul=h("ul",cls?{class:cls}:{});items.forEach(function(x){ul.appendChild(h("li",{},typeof x==="string"?[x]:x))});return ul}
  var aiFirst=firstLesson("ai","ai1");
- m.appendChild(h("section",{class:"home-hero"},[
-  h("img",{class:"home-map",src:"art/home-map.jpg",width:"720",height:"264",alt:""}),
-  h("h1",{text:T("Welcome to Red Arrow Hub","Maligayang pagdating sa Red Arrow Hub")}),
-  h("p",{text:T("Learn AI, cybersecurity and IT in short lessons you can do on your phone.","Matuto ng AI, cybersecurity at IT sa maiikling aralin na kaya mong gawin sa phone.")}),
-  h("p",{class:"home-sub",text:T("Made for Red Arrow High School students in San Nicolas, Pangasinan.","Ginawa para sa mga estudyante ng Red Arrow High School sa San Nicolas, Pangasinan.")}),
-  h("div",{class:"home-actions"},[
-   h("a",{class:"btn btn-solid",href:"index.html",text:T("Start learning","Magsimulang matuto")}),
-   h("button",{type:"button",class:"home-help-link",onclick:function(){teacherCard()},text:T("Need help? Talk to someone","Kailangan ng tulong? Makipag-usap sa tao")})])]));
- m.appendChild(h("section",{class:"home-mission"},[
+ /* v28 hero: full-bleed map fading into the page, heading over its bottom edge. Counts come from D at runtime. */
+ var nL=0,seen={};D.modules.forEach(function(mod){(mod.items||[]).forEach(function(it){if(seen[it.id])return;seen[it.id]=1;if(it.type==="lesson")nL++})});
+ function stat(t){return h("li",{class:"hm-stat",text:t})}
+ m.appendChild(h("section",{class:"home-hero hm-hero"},[
+  h("div",{class:"hm-banner"},[h("img",{class:"home-map",src:"art/home-map.jpg",width:"720",height:"264",alt:""})]),
+  h("div",{class:"hm-hero-text"},[
+   h("p",{class:"hm-eyebrow",text:"Red Arrow High School · San Nicolas, Pangasinan"}),
+   h("h1",{text:T("Learn AI, cyber and IT. Free, on your phone, even offline.","Matuto ng AI, cyber at IT. Libre, sa phone mo, kahit offline.")}),
+   h("p",{class:"hm-lead",text:T("Short lessons, hands-on simulations and quizzes made for Red Arrow High School students.","Maiikling aralin, simulation at quiz na ginawa para sa mga estudyante ng Red Arrow High School.")}),
+   h("div",{class:"hm-actions"},[
+    h("a",{class:"btn btn-solid",href:"index.html",text:T("Start learning","Magsimulang matuto")}),
+    h("a",{class:"btn btn-outline",href:"index.html",text:T("See courses","Tingnan ang mga kurso")})]),
+   h("ul",{class:"hm-stats","aria-label":T("What's inside","Ano ang laman")},[
+    stat(nL+" "+T(nL===1?"lesson":"lessons","na aralin")),
+    stat(D.modules.length+" "+T(D.modules.length===1?"course":"courses","kurso")),
+    stat(T("Works offline","Gumagana offline"))])])]));
+ m.appendChild(h("section",{class:"home-mission hm-mission"},[
   h("h2",{text:T("Our mission","Ang aming misyon")}),
   h("p",{class:"mission-text",text:T("Red Arrow Hub gives every student at Red Arrow High School, whatever phone they have and whatever load they can afford, a free and safe way to learn AI, cybersecurity and IT, and a clear path to college and work.","Layunin ng Red Arrow Hub na bigyan ang bawat estudyante ng Red Arrow High School, anuman ang phone nila at gaano man kalaki ang load nila, ng libre at ligtas na paraan para matuto ng AI, cybersecurity at IT, at ng malinaw na daan papunta sa kolehiyo at trabaho.")}),
   list("trust-list",[
@@ -26,13 +34,14 @@ function render(m,A){var h=A.h,T=A.T,ico=A.ico,teacherCard=A.teacherCard,D=A.D,f
   ["ai","AI Basics","AI Basics","Find out how AI learns, spot when it gets things wrong, and use it honestly for schoolwork.","Alamin kung paano natututo ang AI, kilalanin kapag nagkakamali ito, at gamitin ito nang tapat sa pag-aaral.","hinog","Try it: train a mango sorter","Subukan: sanayin ang mango sorter","ai1"],
   ["cyber","Cyber Safety","Cyber Safety","Make strong passwords, tell a scam text from a real one, and keep your accounts private.","Gumawa ng matibay na password, kilalanin ang scam na text, at panatilihing pribado ang mga account mo.","hotline","Try it: answer the Scam Hotline","Subukan: sagutin ang Scam Hotline","cy1"],
   ["it","IT Foundations","IT Foundations","Learn the parts of a computer, fix slow Wi-Fi, and plan a PC on a budget.","Alamin ang mga bahagi ng computer, ayusin ang mabagal na Wi-Fi, at magplano ng PC na pasok sa budget.","pc","Try it: build a budget PC","Subukan: bumuo ng budget PC","it1"]];
- var cards=h("div",{class:"cards"});
+ var cards=h("div",{class:"cards hm-cards"});
  courses.forEach(function(c){var mod=modOf(c[0]),en=mod&&mod.title===c[1]?mod.title:c[1];
-  cards.appendChild(h("div",{class:"card home-course"},[
+  cards.appendChild(h("div",{class:"card home-course hm-card"},[
+   h("img",{class:"hm-ic",src:"art/courses/"+c[0]+".svg",width:"56",height:"56",alt:""}),
    h("h3",{text:T(en,c[2])}),
    h("p",{text:T(c[3],c[4])}),
-   h("p",{},[h("a",{href:"sim.html?id="+c[5],text:T(c[6],c[7])})]),
-   h("a",{class:"btn btn-outline",href:"lesson.html?id="+encodeURIComponent(firstLesson(c[0],c[8])),text:T("Start the course","Simulan ang kurso")})]))});
+   h("a",{class:"btn btn-outline",href:"lesson.html?id="+encodeURIComponent(firstLesson(c[0],c[8])),text:T("Start the course","Simulan ang kurso")}),
+   h("a",{class:"hm-try",href:"sim.html?id="+c[5],text:T(c[6],c[7])})]))});
  m.appendChild(h("section",{class:"home-courses"},[h("h2",{text:T("What you'll learn","Ano ang matututunan mo")}),cards]));
  m.appendChild(h("section",{class:"home-steps"},[
   h("h2",{text:T("How it works","Paano ito gumagana")}),
@@ -40,6 +49,10 @@ function render(m,A){var h=A.h,T=A.T,ico=A.ico,teacherCard=A.teacherCard,D=A.D,f
    h("li",{},[ico("lesson",""),h("span",{text:T("Read a short lesson. Most take about 5 minutes.","Magbasa ng maikling aralin. Karamihan ay mga 5 minuto lang.")}),h("a",{href:"lesson.html?id="+encodeURIComponent(aiFirst),text:T("Try the first lesson","Subukan ang unang aralin")})]),
    h("li",{},[ico("simulation",""),h("span",{text:T("Try a simulation or quiz. Hints are there if you get stuck.","Subukan ang simulation o quiz. May pahiwatig kung mahirapan ka.")})]),
    h("li",{},[ico("badge",""),h("span",{text:T("Pass a simulation twice to reach Mastered and earn its badge.","Ipasa ang simulation nang dalawang beses para maging Dalubhasa at makuha ang badge.")}),h("a",{href:"profile.html",text:T("See your badges","Tingnan ang mga badge mo")})])])]));
+ m.appendChild(h("section",{class:"card hm-help"},[
+  h("h2",{text:T("Need help?","Kailangan ng tulong?")}),
+  h("p",{text:T("If something online is worrying you, you don't have to deal with it alone.","Kung may bumabagabag sa iyo online, hindi mo kailangang harapin ito nang mag-isa.")}),
+  h("button",{type:"button",class:"btn btn-outline hm-help-btn",onclick:function(){teacherCard()},text:T("Need help? Talk to someone","Kailangan ng tulong? Makipag-usap sa tao")})]));
  m.appendChild(h("section",{class:"home-next"},[
   h("div",{class:"card"},[
    h("h3",{text:T("Thinking about college or a job?","Iniisip mo ba ang kolehiyo o trabaho?")}),
