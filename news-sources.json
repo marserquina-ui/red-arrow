@@ -24,7 +24,7 @@
     "nvidia": { "name": "NVIDIA", "home": "https://blogs.nvidia.com/", "match": ["Nvidia", "NVIDIA"] },
     "meta": { "name": "Meta AI", "home": "https://ai.meta.com/blog/", "match": ["Meta AI", "Llama", "Meta's AI", "Meta Superintelligence"] },
     "microsoft": { "name": "Microsoft AI", "home": "https://microsoft.ai/news/", "match": ["Microsoft AI", "Copilot"] },
-    "xai": { "name": "xAI (SpaceX AI)", "home": "https://x.ai/news", "match": ["xAI", "Grok"] },
+    "xai": { "name": "SpaceXSI (xAI)", "home": "https://x.ai/news", "match": ["xAI", "Grok", "SpaceXSI"] },
     "mistral": { "name": "Mistral AI", "home": "https://mistral.ai/news/", "match": ["Mistral"] }
   },
   "sources": [
