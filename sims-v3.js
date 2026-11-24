@@ -13,7 +13,7 @@
  *   Mastered = pass twice (unchanged)
  * The current runner only awards 10 or 0, and passes on 80% first-try count.
  *
- * Safety: made-up brands only (GKash, LBX, Shoppee, PLDN Fiber); .example domains;
+ * Safety: made-up brands only (GKash, PadalaPagong, PalengKalabaw, BangusNet Fiber); .example domains;
  * IPs only in 192.0.2.x / 198.51.100.x / 203.0.113.x; fictional school hostnames
  * and usernames; defensive only. Scam sim: no victim shaming, first response is
  * tell a parent or teacher, report in the official app, no phone numbers, keep
@@ -760,7 +760,7 @@ var RA2SIMS_V3 = {
         "lesson": "cy2"
       },
       {
-        "q": "“LBX: your parcel needs a ₱1 customs fee at lbx-pay.example.” Scam or safe?",
+        "q": "“PadalaPagong: your parcel needs a ₱1 customs fee at padalapagong-pay.example.” Scam or safe?",
         "choices": [
           "Scam",
           "Safe"
@@ -770,8 +770,8 @@ var RA2SIMS_V3 = {
           "Do couriers usually collect tiny fees through a text link?",
           "Where should you check a real delivery — the official app, or a link in a surprise text?"
         ],
-        "explain": "A tiny fee in a text link is bait. Check the order in the official LBX app, or on the official site you type yourself.",
-        "q_fil": "“LBX: kailangan ng ₱1 customs fee sa lbx-pay.example para sa parcel mo.” Scam o safe?",
+        "explain": "A tiny fee in a text link is bait. Check the order in the official PadalaPagong app, or on the official site you type yourself.",
+        "q_fil": "“PadalaPagong: kailangan ng ₱1 customs fee sa padalapagong-pay.example para sa parcel mo.” Scam o safe?",
         "choices_fil": [
           "Scam",
           "Safe"
@@ -780,7 +780,7 @@ var RA2SIMS_V3 = {
           "Karaniwan bang maningil ang courier ng napakaliit na bayad sa link ng text?",
           "Saan dapat i-check ang totoong delivery — sa opisyal na app, o sa link sa biglang text?"
         ],
-        "explain_fil": "Pain ang napakaliit na bayad sa link ng text. Tingnan ang order sa opisyal na LBX app, o sa opisyal na site na ikaw mismo ang magta-type.",
+        "explain_fil": "Pain ang napakaliit na bayad sa link ng text. Tingnan ang order sa opisyal na PadalaPagong app, o sa opisyal na site na ikaw mismo ang magta-type.",
         "lesson": "cy2"
       },
       {
@@ -808,7 +808,7 @@ var RA2SIMS_V3 = {
         "lesson": "cy2"
       },
       {
-        "q": "“Shoppee: You WON ₱50,000! Send an ID photo to claim.” Scam or safe?",
+        "q": "“PalengKalabaw: You WON ₱50,000! Send an ID photo to claim.” Scam or safe?",
         "choices": [
           "Scam",
           "Safe"
@@ -819,7 +819,7 @@ var RA2SIMS_V3 = {
           "Would a real prize ever start by asking for your ID photo in a text?"
         ],
         "explain": "You cannot win a contest you never joined. Never send an ID photo to a surprise prize message.",
-        "q_fil": "“Shoppee: Nanalo ka ng ₱50,000! Magpadala ng litrato ng ID para kunin ito.” Scam o safe?",
+        "q_fil": "“PalengKalabaw: Nanalo ka ng ₱50,000! Magpadala ng litrato ng ID para kunin ito.” Scam o safe?",
         "choices_fil": [
           "Scam",
           "Safe"
@@ -951,13 +951,13 @@ var RA2SIMS_V3 = {
         "art/phone-inbox.svg"
       ],
       "tapOnly": true,
-      "summary": "A phone inbox shows 8 messages. Students mark each Scam or Safe, then on scam messages they tap the red flag (urgency, strange .example link, unexpected fee, prize they never entered, request for an ID photo, or a request for an OTP). Safe messages have no flag to catch. The screen is a message list only — no login fields, no password boxes, no official-looking wallet sign-in. Brands are fictional: GKash, LBX, Shoppee, PLDN Fiber.",
-      "summary_fil": "May 8 mensahe sa inbox ng phone. Miminarkahan ng estudyante ang bawat isa: Scam o Safe. Sa mga scam, itatap nila ang red flag (pagmamadali, kakaibang .example na link, biglang bayad, premyong hindi naman sinalihan, hiling ng litrato ng ID, o hiling ng OTP). Walang flag na huhulihin sa safe na mensahe. Listahan lang ng mensahe ang screen — walang login, walang password box, walang itsurang official wallet sign-in. Kathang-isip ang mga brand: GKash, LBX, Shoppee, PLDN Fiber.",
+      "summary": "A phone inbox shows 8 messages. Students mark each Scam or Safe, then on scam messages they tap the red flag (urgency, strange .example link, unexpected fee, prize they never entered, request for an ID photo, or a request for an OTP). Safe messages have no flag to catch. The screen is a message list only — no login fields, no password boxes, no official-looking wallet sign-in. Brands are fictional: GKash, PadalaPagong, PalengKalabaw, BangusNet Fiber.",
+      "summary_fil": "May 8 mensahe sa inbox ng phone. Miminarkahan ng estudyante ang bawat isa: Scam o Safe. Sa mga scam, itatap nila ang red flag (pagmamadali, kakaibang .example na link, biglang bayad, premyong hindi naman sinalihan, hiling ng litrato ng ID, o hiling ng OTP). Walang flag na huhulihin sa safe na mensahe. Listahan lang ng mensahe ang screen — walang login, walang password box, walang itsurang official wallet sign-in. Kathang-isip ang mga brand: GKash, PadalaPagong, PalengKalabaw, BangusNet Fiber.",
       "notes": [
         "Keep the required safety line on this screen: “If anyone threatens you or asks for photos, stop and tell an adult.” / “Kung may nagbabanta o humihingi ng litrato, tumigil at magsabi sa adult.” Tapping it opens the help card (already wired in v2.js).",
         "No hardcoded phone numbers anywhere in this sim, including “official hotline” copy. Say “the official app,” or “the contact listed in the official app.”",
         "Do not shame Tita or Jun. Tita may have forwarded a scam without knowing. Jun telling someone quickly is the right move.",
-        "No romance or sextortion stories. No real-brand logos or lookalikes. Use the shared red/teal/gold palette only. Brands in this sim stay fictional: GKash, LBX, Shoppee, and PLDN Fiber.",
+        "No romance or sextortion stories. No real-brand logos or lookalikes. Use the shared red/teal/gold palette only. Brands in this sim stay fictional: GKash, PadalaPagong, PalengKalabaw, and BangusNet Fiber.",
         "All links use the reserved .example domain, which cannot resolve to a real site."
       ],
       "threatLine": {
@@ -967,11 +967,11 @@ var RA2SIMS_V3 = {
       "marks": {
         "scam": {
           "en": "Scam",
-          "fil": "Panloloko"
+          "fil": "Scam"
         },
         "safe": {
           "en": "Safe",
-          "fil": "Ligtas"
+          "fil": "Safe"
         }
       },
       "flagLabels": {
@@ -1019,17 +1019,17 @@ var RA2SIMS_V3 = {
         },
         {
           "id": "sms2",
-          "from": "LBX-Delivery",
+          "from": "PadalaPagong-Delivery",
           "time": "09:02",
-          "body": "LBX: your parcel needs a ₱1 customs fee at lbx-pay.example to be released today.",
-          "body_fil": "LBX: kailangan ng ₱1 customs fee sa lbx-pay.example para maibigay ngayon ang parcel mo.",
+          "body": "PadalaPagong: your parcel needs a ₱1 customs fee at padalapagong-pay.example to be released today.",
+          "body_fil": "PadalaPagong: kailangan ng ₱1 customs fee sa padalapagong-pay.example para maibigay ngayon ang parcel mo.",
           "mark": "scam",
           "flags": [
             "small_fee",
             "fake_link"
           ],
-          "why": "A tiny fee in a text link is bait. Check the order in the official LBX app or at the official website you type yourself — not in the text.",
-          "why_fil": "Pain ang napakaliit na bayad sa link ng text. Tingnan ang order sa opisyal na LBX app o sa opisyal na site na ikaw mismo ang magta-type — hindi sa text."
+          "why": "A tiny fee in a text link is bait. Check the order in the official PadalaPagong app or at the official website you type yourself — not in the text.",
+          "why_fil": "Pain ang napakaliit na bayad sa link ng text. Tingnan ang order sa opisyal na PadalaPagong app o sa opisyal na site na ikaw mismo ang magta-type — hindi sa text."
         },
         {
           "id": "sms3",
@@ -1045,10 +1045,10 @@ var RA2SIMS_V3 = {
         },
         {
           "id": "sms4",
-          "from": "Shoppee Rewards",
+          "from": "PalengKalabaw Rewards",
           "time": "11:05",
-          "body": "Shoppee: You WON ₱50,000! Send an ID photo to claim your prize.",
-          "body_fil": "Shoppee: Nanalo ka ng ₱50,000! Magpadala ng litrato ng ID para kunin ang premyo.",
+          "body": "PalengKalabaw: You WON ₱50,000! Send an ID photo to claim your prize.",
+          "body_fil": "PalengKalabaw: Nanalo ka ng ₱50,000! Magpadala ng litrato ng ID para kunin ang premyo.",
           "mark": "scam",
           "flags": [
             "prize",
@@ -1070,17 +1070,17 @@ var RA2SIMS_V3 = {
         },
         {
           "id": "sms6",
-          "from": "PLDN Fiber Bills",
+          "from": "BangusNet Fiber Bills",
           "time": "18:03",
-          "body": "PLDN Fiber: Pay ₱200 today at pldn-pay.example or your line will be cut tonight.",
-          "body_fil": "PLDN Fiber: Magbayad ng ₱200 ngayon sa pldn-pay.example o puputulin ang line mo tonight.",
+          "body": "BangusNet Fiber: Pay ₱200 today at bangusnet-pay.example or your line will be cut tonight.",
+          "body_fil": "BangusNet Fiber: Magbayad ng ₱200 ngayon sa bangusnet-pay.example o puputulin ang line mo tonight.",
           "mark": "scam",
           "flags": [
             "urgency",
             "fake_link"
           ],
-          "why": "A sudden cutoff threat plus an unofficial link is a scam pattern. Open the official PLDN Fiber app, or the contact listed inside that app, if you need to check a bill.",
-          "why_fil": "Pattern ng scam ang biglang banta na puputulin ang line plus hindi opisyal na link. Buksan ang opisyal na PLDN Fiber app, o ang contact na naka-lista sa loob ng app, kung kailangan mong i-check ang bill."
+          "why": "A sudden cutoff threat plus an unofficial link is a scam pattern. Open the official BangusNet Fiber app, or the contact listed inside that app, if you need to check a bill.",
+          "why_fil": "Pattern ng scam ang biglang banta na puputulin ang line plus hindi opisyal na link. Buksan ang opisyal na BangusNet Fiber app, o ang contact na naka-lista sa loob ng app, kung kailangan mong i-check ang bill."
         },
         {
           "id": "sms7",
@@ -1348,15 +1348,15 @@ var RA2SIMS_V3 = {
       "actions": {
         "ignore": {
           "en": "Ignore (normal)",
-          "fil": "I-ignore (normal)"
+          "fil": "Ignore (normal)"
         },
         "investigate": {
           "en": "Investigate",
-          "fil": "Imbestigahan"
+          "fil": "Investigate"
         },
         "escalate": {
           "en": "Escalate",
-          "fil": "I-escalate / Itaas"
+          "fil": "Escalate"
         }
       },
       "alerts": [
@@ -1503,7 +1503,7 @@ var RA2SIMS_V3 = {
       {
         "q": "Power is on, but the LOS light is red. What does LOS tell you?",
         "choices": [
-          "The fiber line may be loose or damaged. Check the connector gently; if it stays red, contact PLDN Fiber. Do not bend, cut, or force the cable.",
+          "The fiber line may be loose or damaged. Check the connector gently; if it stays red, contact BangusNet Fiber. Do not bend, cut, or force the cable.",
           "Your phone battery is dead.",
           "You need a new Wi-Fi password right away."
         ],
@@ -1512,10 +1512,10 @@ var RA2SIMS_V3 = {
           "LOS stands for Loss of Signal on a fiber router.",
           "Be gentle. This is not a cable you cut or force back in."
         ],
-        "explain": "A red LOS light means the router is not getting a fiber signal. Check that the connector is seated gently. If it stays red, contact PLDN Fiber through the official app or the contact on your bill or the router sticker. Do not bend, cut, splice, or force the cable.",
+        "explain": "A red LOS light means the router is not getting a fiber signal. Check that the connector is seated gently. If it stays red, contact BangusNet Fiber through the official app or the contact on your bill or the router sticker. Do not bend, cut, splice, or force the cable.",
         "q_fil": "Naka-on ang Power, pero pula ang ilaw ng LOS. Ano ang sinasabi ng LOS?",
         "choices_fil": [
-          "Baka maluwag o sira ang fiber line. Dahan-dahang tingnan ang connector; kung pula pa rin, kontakin ang PLDN Fiber. Huwag baluktutin, putulin, o pilitin ang cable.",
+          "Baka maluwag o sira ang fiber line. Dahan-dahang tingnan ang connector; kung pula pa rin, kontakin ang BangusNet Fiber. Huwag baluktutin, putulin, o pilitin ang cable.",
           "Wala nang battery ang phone mo.",
           "Kailangan mo agad ng bagong Wi-Fi password."
         ],
@@ -1523,7 +1523,7 @@ var RA2SIMS_V3 = {
           "Loss of Signal ang ibig sabihin ng LOS sa fiber router.",
           "Dahan-dahan. Hindi ito cable na puluputulin o pipilitin na isaksak pabalik."
         ],
-        "explain_fil": "Kung pula ang LOS, hindi nakakakuha ng fiber signal ang router. Dahan-dahang tiyaking nakaupo ang connector. Kung pula pa rin, kontakin ang PLDN Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router. Huwag baluktutin, putulin, i-splice, o pilitin ang cable.",
+        "explain_fil": "Kung pula ang LOS, hindi nakakakuha ng fiber signal ang router. Dahan-dahang tiyaking nakaupo ang connector. Kung pula pa rin, kontakin ang BangusNet Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router. Huwag baluktutin, putulin, i-splice, o pilitin ang cable.",
         "lesson": "it2"
       },
       {
@@ -1538,7 +1538,7 @@ var RA2SIMS_V3 = {
           "Many internet-link problems clear after a calm restart.",
           "Give the router time to come back before you touch passwords or apps."
         ],
-        "explain": "Restart, wait a full two minutes, then test a page. If the Internet/PON light is still red, contact PLDN Fiber through the official app or the contact on your bill or the router sticker.",
+        "explain": "Restart, wait a full two minutes, then test a page. If the Internet/PON light is still red, contact BangusNet Fiber through the official app or the contact on your bill or the router sticker.",
         "q_fil": "Naka-on ang Power, naka-off ang LOS (mabuti), pero pula pa rin ang ilaw ng Internet/PON. Ano ang susunod?",
         "choices_fil": [
           "I-restart ang router at maghintay ng 2 minuto, saka i-test.",
@@ -1549,7 +1549,7 @@ var RA2SIMS_V3 = {
           "Maraming problema sa internet link ang nawawala pagkatapos ng mahinahong restart.",
           "Bigyan muna ng oras ang router na bumalik bago mo galawin ang password o app."
         ],
-        "explain_fil": "I-restart, maghintay ng buong dalawang minuto, saka subukan ang isang page. Kung pula pa rin ang Internet/PON, kontakin ang PLDN Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router.",
+        "explain_fil": "I-restart, maghintay ng buong dalawang minuto, saka subukan ang isang page. Kung pula pa rin ang Internet/PON, kontakin ang BangusNet Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router.",
         "lesson": "it2"
       },
       {
@@ -1607,7 +1607,7 @@ var RA2SIMS_V3 = {
       {
         "q": "All four lights look good, but every device in the house is still offline. What is a smart next step?",
         "choices": [
-          "Contact PLDN Fiber through the official app or the contact on your bill or the router sticker, and describe the lights.",
+          "Contact BangusNet Fiber through the official app or the contact on your bill or the router sticker, and describe the lights.",
           "Throw the router away and buy a new one today.",
           "Post the Wi-Fi password online so a stranger can help."
         ],
@@ -1616,10 +1616,10 @@ var RA2SIMS_V3 = {
           "The problem may be on the provider’s side. Who can see that?",
           "Never share the Wi-Fi password in a public post."
         ],
-        "explain": "If the lights look fine but nothing can get online, it may be a provider outage. Contact PLDN Fiber through the official app or the contact on your bill or the router sticker, and tell them what the lights show. Do not post the password, and do not rush to buy a new router.",
+        "explain": "If the lights look fine but nothing can get online, it may be a provider outage. Contact BangusNet Fiber through the official app or the contact on your bill or the router sticker, and tell them what the lights show. Do not post the password, and do not rush to buy a new router.",
         "q_fil": "Mukhang ayos ang apat na ilaw, pero offline pa rin ang lahat ng device sa bahay. Ano ang matinong susunod na hakbang?",
         "choices_fil": [
-          "Kontakin ang PLDN Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router, at ilarawan ang mga ilaw.",
+          "Kontakin ang BangusNet Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router, at ilarawan ang mga ilaw.",
           "Itapon ang router at bumili ng bago ngayong araw.",
           "I-post online ang Wi-Fi password para matulungan ka ng isang estranghero."
         ],
@@ -1627,7 +1627,7 @@ var RA2SIMS_V3 = {
           "Baka nasa panig ng provider ang problema. Sino ang makakakita niyon?",
           "Huwag kailanman ibahagi ang Wi-Fi password sa pampublikong post."
         ],
-        "explain_fil": "Kung ayos ang mga ilaw pero walang maka-online, baka may outage sa provider. Kontakin ang PLDN Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router, at sabihin kung ano ang nakikita sa mga ilaw. Huwag i-post ang password, at huwag magmadaling bumili ng bagong router.",
+        "explain_fil": "Kung ayos ang mga ilaw pero walang maka-online, baka may outage sa provider. Kontakin ang BangusNet Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router, at sabihin kung ano ang nakikita sa mga ilaw. Huwag i-post ang password, at huwag magmadaling bumili ng bagong router.",
         "lesson": "it2"
       },
       {
@@ -1672,14 +1672,14 @@ var RA2SIMS_V3 = {
         "art/router.svg"
       ],
       "tapOnly": true,
-      "summary": "A home fiber router from the fictional provider PLDN Fiber has four tappable lights: Power, Internet/PON, LOS, and Wi-Fi. Each tap reveals a short clue. Good/on lights use teal, warning lights use accent red, off lights use cream. Students are never told to cut, splice, or force the fiber cable, and no phone number is listed — they should use the official PLDN Fiber app or the contact printed on their bill or the router sticker.",
-      "summary_fil": "May apat na pwedeng i-tap na ilaw ang home fiber router mula sa kathang-isip na provider na PLDN Fiber: Power, Internet/PON, LOS, at Wi-Fi. May maikling clue ang bawat tap. Teal ang good/on, accent red ang warning, cream ang off. Hindi inaatasan ang estudyante na putulin, i-splice, o pilitin ang fiber cable, at walang naka-listang numero ng telepono — ang official PLDN Fiber app, o ang contact sa bill o sa sticker ng router, ang gamitin.",
+      "summary": "A home fiber router from the fictional provider BangusNet Fiber has four tappable lights: Power, Internet/PON, LOS, and Wi-Fi. Each tap reveals a short clue. Good/on lights use teal, warning lights use accent red, off lights use cream. Students are never told to cut, splice, or force the fiber cable, and no phone number is listed — they should use the official BangusNet Fiber app or the contact printed on their bill or the router sticker.",
+      "summary_fil": "May apat na pwedeng i-tap na ilaw ang home fiber router mula sa kathang-isip na provider na BangusNet Fiber: Power, Internet/PON, LOS, at Wi-Fi. May maikling clue ang bawat tap. Teal ang good/on, accent red ang warning, cream ang off. Hindi inaatasan ang estudyante na putulin, i-splice, o pilitin ang fiber cable, at walang naka-listang numero ng telepono — ang official BangusNet Fiber app, o ang contact sa bill o sa sticker ng router, ang gamitin.",
       "notes": [
         "Wire light fills in router.svg by id: light-power, light-pon, light-los, light-wifi. Fill #0f766e for on/good, #c0392b for warn, #fff7ed for off. Stroke stays #3b1f1a at 2px.",
         "Start the scene with Power off so students begin at the simplest check. Later scenes follow the step order.",
         "Never include a real-brand logo or a phone number."
       ],
-      "provider": "PLDN Fiber",
+      "provider": "BangusNet Fiber",
       "lights": [
         {
           "id": "power",
@@ -1735,8 +1735,8 @@ var RA2SIMS_V3 = {
             },
             "warn": {
               "fill": "#c0392b",
-              "clue": "Loss of signal. The fiber cable may be loose. Check the connector gently. If LOS stays on, contact PLDN Fiber through the official app or the contact on your bill or the router sticker. Do not bend, cut, splice, or force the cable.",
-              "clue_fil": "May loss of signal. Baka maluwag ang fiber cable. Dahan-dahang tingnan ang connector. Kung naka-on pa rin ang LOS, kontakin ang PLDN Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router. Huwag baluktutin, putulin, i-splice, o pilitin ang cable."
+              "clue": "Loss of signal. The fiber cable may be loose. Check the connector gently. If LOS stays on, contact BangusNet Fiber through the official app or the contact on your bill or the router sticker. Do not bend, cut, splice, or force the cable.",
+              "clue_fil": "May loss of signal. Baka maluwag ang fiber cable. Dahan-dahang tingnan ang connector. Kung naka-on pa rin ang LOS, kontakin ang BangusNet Fiber sa opisyal na app o sa contact sa bill o sa sticker ng router. Huwag baluktutin, putulin, i-splice, o pilitin ang cable."
             }
           }
         },
@@ -1753,8 +1753,8 @@ var RA2SIMS_V3 = {
             },
             "off": {
               "fill": "#fff7ed",
-              "clue": "Wi-Fi may be switched off. Look for a Wi-Fi button on the router, or check the setting in the official PLDN Fiber app.",
-              "clue_fil": "Baka naka-off ang Wi-Fi. Hanapin ang Wi-Fi button sa router, o tingnan ang setting sa opisyal na PLDN Fiber app."
+              "clue": "Wi-Fi may be switched off. Look for a Wi-Fi button on the router, or check the setting in the official BangusNet Fiber app.",
+              "clue_fil": "Baka naka-off ang Wi-Fi. Hanapin ang Wi-Fi button sa router, o tingnan ang setting sa opisyal na BangusNet Fiber app."
             }
           }
         }
@@ -1762,8 +1762,6 @@ var RA2SIMS_V3 = {
       "scenes": [
         {
           "id": "no-power",
-          "title": "No power",
-          "title_fil": "Walang kuryente",
           "lights": {
             "power": "off",
             "pon": "off",
@@ -1773,8 +1771,6 @@ var RA2SIMS_V3 = {
         },
         {
           "id": "los-alarm",
-          "title": "LOS alarm",
-          "title_fil": "Babala sa LOS",
           "lights": {
             "power": "on",
             "pon": "off",
@@ -1784,8 +1780,6 @@ var RA2SIMS_V3 = {
         },
         {
           "id": "no-internet",
-          "title": "No internet",
-          "title_fil": "Walang internet",
           "lights": {
             "power": "on",
             "pon": "warn",
@@ -1795,8 +1789,6 @@ var RA2SIMS_V3 = {
         },
         {
           "id": "all-good",
-          "title": "All good",
-          "title_fil": "Ayos na lahat",
           "lights": {
             "power": "on",
             "pon": "on",

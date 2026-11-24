@@ -34,7 +34,7 @@
    mergeFaqFil will append them instead of overwriting an older row.
 
    Safety: defensive answers only. Keywords avoid crisis words handled
-   by askmar-safety.js. Answers use fictional brands (GKash, LBX, Shoppee)
+   by askmar-safety.js. Answers use fictional brands (GKash, PadalaPagong, PalengKalabaw)
    and .example domains. The keyword "gcash" is kept on the scam row only
    so students who type the real brand still get a match; the answer says
    GKash.
