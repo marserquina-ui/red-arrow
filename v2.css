@@ -270,3 +270,31 @@ html[data-theme="dark"] .tag-chip.tag-it{color:var(--green-text);background:var(
   .logo{flex:1 1 auto;min-width:0}
   .logo-text strong{font-size:.95rem}
 }
+
+/* ---- v20 contrast hotfix: light cards keep dark ink; kickers and borders meet AA ---- */
+html[data-theme="dark"] div.quiz,html[data-theme="dark"] .scen{background:#fff;color:#1c1917}
+html[data-theme="dark"] .quiz-q,html[data-theme="dark"] div.quiz h2,html[data-theme="dark"] .scen h2,html[data-theme="dark"] .scen .quiz-q{color:#1c1917}
+html[data-theme="dark"] .sim-board,html[data-theme="dark"] .sim-board .muted,html[data-theme="dark"] .pc-part .muted,html[data-theme="dark"] div.quiz .muted,html[data-theme="dark"] .scen .muted,html[data-theme="dark"] .quiz-progress,html[data-theme="dark"] .site-footer,html[data-theme="dark"] .site-footer p,html[data-theme="dark"] .site-footer .muted{color:#57534e}
+html[data-theme="dark"] .site-footer{background:#fff7ed}
+html[data-theme="dark"] .kicker{color:var(--pink-text)}
+html[data-theme="dark"] .sim-board .kicker,html[data-theme="dark"] div.quiz .kicker,html[data-theme="dark"] .scen .kicker{color:#9a3412}
+html[data-theme="dark"] .mrow{background:var(--card);color:var(--text);border-color:var(--teal-text)}
+html[data-theme="dark"] .lesson-credit{border-color:var(--pink-text);color:var(--text)}
+html[data-theme="dark"] .lesson-credit p,html[data-theme="dark"] .lesson-credit .license-tag{color:var(--text)}
+html[data-theme="dark"] .lesson-credit-links a{color:var(--teal-text)}
+.lesson-credit-links a,.lesson-deeper{display:inline-flex;align-items:center;min-height:48px;padding:.35rem .5rem}
+html[data-theme="dark"] .mrow img.ui-ic{filter:invert(1) hue-rotate(180deg) brightness(1.15)}
+/* Light surfaces in dark mode need a darker focus ring than --focus (#93c5fd). */
+html[data-theme="dark"] .sim-board :focus-visible,
+html[data-theme="dark"] div.quiz :focus-visible,
+html[data-theme="dark"] .scen :focus-visible,
+html[data-theme="dark"] .choice:focus-visible,
+html[data-theme="dark"] .overlay :focus-visible,
+html[data-theme="dark"] .site-footer :focus-visible{outline-color:#1d4ed8!important}
+.pc-slot,.pc-part{scroll-margin-bottom:88px}
+@media (max-width:767px){
+  body.sim-pc .pc-slots,body.sim-pc .pc-list{padding-bottom:88px}
+  body.sim-pc .pc-slot,body.sim-pc .pc-part{scroll-margin-bottom:88px}
+}
+html[data-theme="dark"] .sim-board .hint{color:#57534e;background:transparent}
+
