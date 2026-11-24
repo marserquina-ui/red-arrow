@@ -1,5 +1,5 @@
 /* Offline cache for the Red Arrow static site (GitHub Pages at /red-arrow/). */
-const CACHE = "red-arrow-hub-v28";
+const CACHE = "red-arrow-hub-v29";
 const ASSETS = [
 "./",
 "./art/alert-panel.svg",
@@ -124,7 +124,9 @@ const ASSETS = [
 self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE).then(function (cache) {
-      return cache.addAll(ASSETS);
+      /* v29: cache:"reload" skips the browser HTTP cache (GitHub Pages sends max-age=600),
+         so a new version never precaches stale copies of the old files. */
+      return cache.addAll(ASSETS.map(function (u) { return new Request(u, { cache: "reload" }); }));
     }).then(function () { return self.skipWaiting(); })
   );
 });
@@ -132,7 +134,20 @@ self.addEventListener("install", function (event) {
 self.addEventListener("activate", function (event) {
   event.waitUntil(
     caches.keys().then(function (keys) {
-      return Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
+      var old = keys.filter(function (k) { return k !== CACHE; });
+      /* v29: keep lessons a student already opened (deep/*.js, cached on first view) and the last news.json working offline
+         after an update. They are refreshed in the background on the next online view. */
+      return caches.open(CACHE).then(function (cur) {
+        return Promise.all(old.map(function (k) {
+          return caches.open(k).then(function (c) {
+            return c.keys().then(function (reqs) {
+              return Promise.all(reqs.filter(function (r) { return r.url.indexOf("/deep/") >= 0 || /\/news\.json$/.test(r.url); }).map(function (r) {
+                return cur.match(r).then(function (have) { return have || c.match(r).then(function (res) { return res && cur.put(r, res); }); });
+              }));
+            });
+          });
+        }));
+      }).then(function () { return Promise.all(old.map(function (k) { return caches.delete(k); })); });
     }).then(function () { return self.clients.claim(); })
   );
 });
@@ -160,16 +175,44 @@ self.addEventListener("fetch", function (event) {
     );
     return;
   }
+  /* v29: page loads (HTML) are network first, revalidating past the HTTP cache, so an update
+     shows on the next online load. Offline: the cached page (any ?id=), then offline.html. */
+  if (req.mode === "navigate") {
+    var key = new URL(req.url); key.search = ""; key.hash = ""; key = key.href;
+    var fromCache = function () {
+      return caches.match(key).then(function (c) {
+        return c || caches.match(req, { ignoreSearch: true }).then(function (c2) { return c2 || caches.match("./offline.html"); });
+      });
+    };
+    var net = fetch(req.url, { cache: "no-cache", credentials: "same-origin" }).then(function (res) {
+      if (res && res.ok && res.type === "basic") {
+        var copy = res.clone();
+        caches.open(CACHE).then(function (cache) { cache.put(key, copy); });
+      }
+      return res;
+    });
+    /* Weak signal: if the network takes over 6 s, show the cached page (the fresh copy still lands in the cache). */
+    event.respondWith(new Promise(function (resolve) {
+      var done = false;
+      var t = setTimeout(function () { fromCache().then(function (c) { if (!done && c) { done = true; resolve(c); } }); }, 6000);
+      net.then(function (res) { clearTimeout(t); if (!done) { done = true; resolve(res); } })
+        .catch(function () { clearTimeout(t); fromCache().then(function (c) { if (!done) { done = true; resolve(c || Response.error()); } }); });
+    }));
+    return;
+  }
+  /* Other files: cache first, refreshed in the background past the HTTP cache (cache:"no-cache"
+     revalidates with the server, usually a small 304). */
   event.respondWith(
     caches.match(req, { ignoreSearch: true }).then(function (cached) {
-      var net = fetch(req).then(function (res) {
+      var net = fetch(req, { cache: "no-cache" }).then(function (res) {
         if (res && res.ok && res.type === "basic") {
           var copy = res.clone();
           caches.open(CACHE).then(function (cache) { cache.put(req, copy); });
         }
         return res;
       }).catch(function () {
-        return cached || caches.match("./offline.html");
+        /* Offline and not cached: a real network error, so scripts fail cleanly (no HTML in place of JS). */
+        return cached || Response.error();
       });
       return cached || net;
     })
