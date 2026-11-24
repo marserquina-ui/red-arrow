@@ -104,6 +104,7 @@ const ASSETS = [
 "./sims-v3.js",
 "./sw.js",
 "./teacher.html",
+"./about.html",
 "./v2.css",
 "./v2.js"
 ];

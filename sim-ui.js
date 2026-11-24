@@ -401,7 +401,9 @@
       var left = ui.budget - used;
       bar.className = "budget-pin" + (over ? " is-over" : " is-ok");
       bar.innerHTML = "";
-      bar.appendChild(api.h("p", { text: api.T("Budget", "Badyet") + " ₱" + used.toLocaleString() + " / ₱" + ui.budget.toLocaleString() + " · " + (over ? api.T("Over budget", "Lampas sa budget") + " ₱" + Math.abs(left).toLocaleString() : api.T("Remaining", "Natitira") + " ₱" + left.toLocaleString()) }));
+      bar.appendChild(api.h("p", { text: over
+        ? ("₱" + used.toLocaleString() + " / ₱" + ui.budget.toLocaleString() + " · " + api.T("Over by ₱" + Math.abs(left).toLocaleString(), "Lampas ₱" + Math.abs(left).toLocaleString()))
+        : ("₱" + used.toLocaleString() + " / ₱" + ui.budget.toLocaleString() + " · ₱" + left.toLocaleString() + " " + api.T("left", "natitira")) }));
       var fill = Math.min(100, Math.round(used / ui.budget * 100));
       var meter = api.h("div", { class: "budget-meter", "aria-hidden": "true" });
       meter.appendChild(api.h("span", { style: "width:" + fill + "%" }));
