@@ -328,11 +328,17 @@
     };
     var wrap = api.h("div", { class: "sim-board pc-board" });
     root.appendChild(wrap);
+    var bar = api.h("div", { class: "budget-pin", role: "status" });
+    wrap.appendChild(bar);
     var body = api.h("div", { class: "pc-body" });
     wrap.appendChild(body);
-    var bar = api.h("div", { class: "budget-pin", role: "status", "aria-live": "polite" });
-    wrap.appendChild(bar);
     document.body.classList.add("sim-pc");
+    var live = document.getElementById("pc-budget-live");
+    if (!live) {
+      live = api.h("div", { id: "pc-budget-live", class: "sr-live", "aria-live": "polite", "aria-atomic": "true" });
+      document.body.appendChild(live);
+    }
+    var prevSlots = {};
 
     function spent() {
       var t = 0;
@@ -399,9 +405,56 @@
       var meter = api.h("div", { class: "budget-meter", "aria-hidden": "true" });
       meter.appendChild(api.h("span", { style: "width:" + fill + "%" }));
       bar.appendChild(meter);
+      syncBudgetLine(used, left, over);
+      announceChanges(used, left);
     }
+    function leftLabel(left, over) {
+      return over
+        ? api.T("Over by ₱" + Math.abs(left).toLocaleString(), "Lampas ₱" + Math.abs(left).toLocaleString())
+        : ("₱" + left.toLocaleString() + " " + api.T("left", "natitira"));
+    }
+    function syncBudgetLine(used, left, over) {
+      if (used == null) {
+        used = spent();
+        left = ui.budget - used;
+        over = used > ui.budget;
+      }
+      var actions = document.querySelector("body.sim-pc .quiz-actions") || document.querySelector(".quiz-actions");
+      if (!actions) return;
+      var line = actions.querySelector(".budget-left");
+      if (!line) {
+        line = api.h("p", { class: "budget-left" });
+        var chk = null;
+        var btns = actions.querySelectorAll("button, a.btn");
+        for (var i = 0; i < btns.length; i++) {
+          if (/Check|Tingnan/.test((btns[i].textContent || ""))) { chk = btns[i]; break; }
+        }
+        if (chk) actions.insertBefore(line, chk);
+        else actions.appendChild(line);
+      }
+      line.textContent = leftLabel(left, over);
+    }
+    function announceChanges(used, left) {
+      var changed = [];
+      cats.forEach(function (cat) {
+        var now = slots[cat] ? slots[cat].id : null;
+        var was = prevSlots[cat] || null;
+        if (now && now !== was) changed.push({ cat: cat, part: slots[cat], kind: "place" });
+        else if (!now && was) changed.push({ cat: cat, kind: "remove" });
+      });
+      prevSlots = {};
+      cats.forEach(function (cat) { if (slots[cat]) prevSlots[cat] = slots[cat].id; });
+      if (!changed.length || !live) return;
+      var bits = changed.map(function (ch) {
+        var name = api.T.apply(null, catLab[ch.cat]);
+        if (ch.kind === "place") return api.T(name + " placed", "Nailagay ang " + name);
+        return api.T(name + " removed", "Tinanggal ang " + name);
+      });
+      live.textContent = bits.join(". ") + ", " + leftLabel(left, left < 0);
+    }
+    function syncBudget() { render(); }
     render();
-    return { unmount: function () { document.body.classList.remove("sim-pc"); } };
+    return { unmount: function () { document.body.classList.remove("sim-pc"); var el = document.getElementById("pc-budget-live"); if (el && el.parentNode) el.parentNode.removeChild(el); }, syncBudget: syncBudget };
   }
 
   var kinds = {

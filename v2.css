@@ -102,16 +102,16 @@ table.m{table-layout:fixed;overflow-wrap:anywhere}table.m td:last-child,table.m 
 .pc-slots{display:grid;grid-template-columns:1fr;gap:.4rem;margin:.6rem 0}
 .pc-slot{align-items:flex-start;text-align:left}
 .pc-part{align-items:flex-start;text-align:left;width:100%;margin:.3rem 0}
-.budget-pin{display:flex;align-items:center;gap:.5rem;box-sizing:border-box;min-height:40px;max-height:48px;padding:.25rem .7rem;position:sticky;bottom:0;z-index:35;background:#fff7ed;border:2px solid #0f766e;border-radius:12px 12px 0 0;box-shadow:0 -6px 18px rgba(28,25,23,.1)}
+.budget-pin{display:flex;align-items:center;gap:.5rem;box-sizing:border-box;min-height:40px;max-height:48px;padding:.25rem .7rem;position:static;margin:0 0 .6rem;background:#fff7ed;border:2px solid #0f766e;border-radius:12px}
 .budget-pin.is-over{border-color:#c0392b;background:#fff1ef}
 .budget-pin p{margin:0;font-weight:700;font-size:.9rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
 .budget-meter{height:8px;width:4.5rem;flex:0 0 4.5rem;background:#e7e5e4;border-radius:99px;overflow:hidden}
 .budget-meter>span{display:block;height:100%;background:#0f766e}
 .budget-pin.is-over .budget-meter>span{background:#c0392b}
+.budget-left{margin:0 0 .45rem;font-weight:700;font-size:.95rem;color:#134e4a;line-height:1.3}
+.quiz-actions .budget-left{flex-basis:100%;width:100%}
+.sr-live{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (max-width:767px){
-  .budget-pin{position:fixed;left:0;right:0;bottom:76px;max-height:48px;border-radius:12px 12px 0 0}
-  body.sim-pc{padding-bottom:calc(76px + 48px + 16px)}
-  .pc-slot,.pc-part{scroll-margin-bottom:calc(76px + 48px + 16px)}
   .light-row,.inbox-row,.alert-row{width:100%;min-height:48px}
 }
 @media (min-width:768px){
@@ -151,7 +151,6 @@ html{scroll-padding-bottom:calc(76px + 16px)}
 @media (max-width:767px){
   /* Keep Check/Hint/Next in normal flow under the choices so they never cover answers or each other. */
   .quiz-actions{position:static;margin-bottom:calc(76px + 16px);scroll-margin-bottom:calc(76px + 16px)}
-  body.sim-pc .quiz-actions{margin-bottom:calc(76px + 48px + 16px);scroll-margin-bottom:calc(76px + 48px + 16px)}
   .mango-bins{position:static;display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0}
   .scene-nav{margin-bottom:calc(76px + 16px);scroll-margin-bottom:calc(76px + 16px)}
   .ask-full .ask-tools{position:fixed;left:0;right:0;bottom:calc(68px + var(--kb,0px) + 3.6rem);background:#fff;padding:.4rem 1rem 0;margin:0;z-index:51;border-top:1px solid var(--line)}
@@ -161,3 +160,16 @@ html{scroll-padding-bottom:calc(76px + 16px)}
 .header-actions{flex-wrap:wrap;align-items:center;gap:.4rem}
 .fil-draft-note{font-size:.72rem;font-weight:700;color:#134e4a;line-height:1.25;max-width:9.5rem}
 .site-footer p+p{margin-top:.55rem}
+@media (max-width:767px){
+  body[data-page="practice"] .wrap{padding-top:.4rem;padding-bottom:1.25rem}
+  body[data-page="practice"] .page-title{margin:0 0 .2rem;font-size:1.35rem}
+  body[data-page="practice"] .sim2{gap:.45rem}
+  body[data-page="practice"] .kicker{margin:0 0 .15rem}
+  body[data-page="practice"] .dots{margin:.2rem 0 .35rem}
+  body[data-page="practice"] .quiz{padding:.45rem .7rem;margin:0}
+  body[data-page="practice"] .quiz-q{margin:0 0 .3rem;font-size:1.05rem}
+  body[data-page="practice"] .choices{gap:.3rem}
+  body[data-page="practice"] .choice{padding:.5rem .7rem}
+  body[data-page="practice"] .quiz-actions{margin-top:.3rem}
+  body[data-page="practice"] .quiz-actions .btn-solid{margin-bottom:.3rem}
+}
