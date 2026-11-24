@@ -64,9 +64,9 @@ function header(){var nav=[["index.html","learn",T("Learn","Aralin")],["ask.html
  var langBtn=h("button",{class:"nav-toggle",style:"display:inline-flex",onclick:function(){uiState({});localStorage.setItem("ra-lang",fil?"en":"fil");location.reload()}},[ico("language",""),document.createTextNode(fil?"EN":"Filipino")]);
  var skip=h("a",{class:"skip-link",href:"#main",text:T("Skip to content","Laktawan papunta sa nilalaman")});
  var hd=h("header",{class:"site-header"},[h("div",{class:"header-inner"},[h("a",{class:"logo",href:"index.html",html:'<img src="assets/logo.svg" width="36" height="36" alt=""><span class="logo-text"><strong>Red Arrow Hub</strong><span>San Nicolas, Pangasinan</span></span>'}),
-  h("div",{class:"header-actions"},[langBtn])]),
+  h("div",{class:"header-actions"},[langBtn,D.filipinoDraft?h("span",{class:"fil-draft-note",text:T("Filipino: draft, under teacher review","Burador pa, sinusuri ng guro")}):null])]),
   h("nav",{"aria-label":"Main",class:"tabbar"},[h("ul",{style:"display:flex;justify-content:space-around;list-style:none;margin:0;padding:.3rem"},nav.map(function(n){return h("li",{class:n[0]=="ask.html"?"tab-ask":""},[h("a",{href:n[0],style:"display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;color:var(--ink);font-weight:600;font-size:.85rem;padding:.4rem .6rem;min-height:48px"},[ico(n[1],""),document.createTextNode(n[2])])])}))])]);
- document.body.prepend(hd);document.body.prepend(skip);if(fil)document.body.prepend(h("div",{class:"draft-banner",style:"display:block",text:"Draft na salin — pakisuri ng native speaker."}));if(localStorage.getItem("ra-proj")==="1")document.body.classList.add("projector")}
+ document.body.prepend(hd);document.body.prepend(skip);if(D.filipinoDraft&&fil)document.body.prepend(h("div",{class:"draft-banner",style:"display:block",text:"Draft na salin — pakisuri ng native speaker."}));if(localStorage.getItem("ra-proj")==="1")document.body.classList.add("projector")}
 var P={
 home:function(m){m.appendChild(h("h1",{class:"page-title",text:T("Your courses","Mga kurso mo")}));
  D.modules.forEach(function(mod){var ids=mod.items.filter(function(x){return x.type=="lesson"||x.type=="sim"}).map(function(x){return x.id});var tot=ids.reduce(function(a,id){return a+(st.m[id]||0)},0),pct=Math.round(100*tot/(ids.length*4));
@@ -109,6 +109,7 @@ teacher:function(m){m.appendChild(h("h1",{class:"page-title",text:T("Mastery sum
 ask:function(m){m.classList.add("ask-full");mountAsk(m)}
 };
 function notFound(m){m.appendChild(h("h1",{class:"page-title",text:T("Lesson not found","Hindi nahanap ang aralin")}));m.appendChild(h("p",{class:"muted",text:T("That lesson or simulation is not on this site.","Wala rito ang aralin o simulation na iyon.")}));m.appendChild(h("a",{class:"btn btn-solid",href:"index.html",text:T("Back to courses","Bumalik sa mga kurso")}))}
+function runAskSafety(raw){try{var Safe=window.RA2Safety;if(!Safe||typeof Safe.scrubPII!=="function"||typeof Safe.classify!=="function")return {closed:true};var scrub=Safe.scrubPII(raw),verdict=Safe.classify(raw);if(!scrub||!verdict||!verdict.label)return {closed:true};return {closed:false,scrub:scrub,verdict:verdict}}catch(e){return {closed:true}}}
 function mountAsk(m){if(document.body.getAttribute("data-page")==="ask"||window.matchMedia("(min-width:1024px)").matches)ensureFaqFil();else m.addEventListener("focusin",function once(){ensureFaqFil();m.removeEventListener("focusin",once)});
 m.appendChild(h("img",{class:"mar-face",src:"art/mar-avatar.svg",alt:T("Mar, the site guide","Si Mar, gabay sa site"),width:"64",height:"64"}));m.appendChild(h("h1",{class:"page-title",text:"Ask Mar"}));m.appendChild(h("p",{class:"muted",text:T("Mar answers from this site's lessons, offline. Mar is a program and can be wrong. Questions aren't saved. Don't type your name, phone number, email or LRN.","Sumasagot si Mar mula sa mga aralin, offline. Program si Mar at puwedeng magkamali. Hindi sine-save ang mga tanong. Huwag i-type ang pangalan, numero, email o LRN.")}));
  var Safe=window.RA2Safety;
@@ -131,9 +132,11 @@ m.appendChild(h("img",{class:"mar-face",src:"art/mar-avatar.svg",alt:T("Mar, the
   else{b.appendChild(h("p",{text:faqText(best,"a","af")}));b.appendChild(h("p",{text:"🤔 "+faqText(best,"back","backf")}))}
   b.appendChild(h("a",{class:"btn btn-solid",href:best.link,text:T("Practice this","I-practice ito")}))}
  function reply(raw){
-  /* Official RA2Safety run order. Never store the question. Classify the original wording. */
-  var scrub=Safe?Safe.scrubPII(raw):{clean:raw,found:[]};
-  var verdict=Safe?Safe.classify(raw):{label:"offtopic-or-faq"};
+  /* Official RA2Safety run order. Never store the question. Classify the original wording.
+     Fail closed: if the safety module is missing or throws, show the help card and do not answer. */
+  var gate=runAskSafety(raw);
+  if(gate.closed){inp.value="";teacherCard();return}
+  var scrub=gate.scrub,verdict=gate.verdict;
   var t=scrub.clean,label=verdict.label;
   inp.value="";
   chat.appendChild(h("div",{class:"me",text:t}));
@@ -154,7 +157,7 @@ m.appendChild(h("img",{class:"mar-face",src:"art/mar-avatar.svg",alt:T("Mar, the
 function nextAfter(id){for(var a=0;a<D.modules.length;a++){var it=D.modules[a].items;for(var b=0;b<it.length;b++)if(it[b].id==id)return it[b+1]}}
 if("serviceWorker" in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});
 document.addEventListener("keydown",function(e){if(e.target.tagName=="INPUT"||document.querySelector(".overlay"))return;if(e.key=="ArrowDown"||e.key=="ArrowUp"){var c=[].slice.call(document.querySelectorAll(".choice:not([disabled])"));if(!c.length)return;var i=c.indexOf(document.activeElement);i=e.key=="ArrowDown"?Math.min(c.length-1,i+1):Math.max(0,i-1);c[i].focus();e.preventDefault()}else if(e.key=="ArrowRight"||e.key=="ArrowLeft"){var bs=document.querySelectorAll(".lesson-col .quiz-actions .btn,.step-nav");var want=e.key=="ArrowRight"?/Next|Susunod|Continue|Magpatuloy|Try it|Subukan|Done|Tapos/:/Back|Bumalik/;[].some.call(document.querySelectorAll(".lesson-col .quiz-actions .btn"),function(b){if(want.test(b.textContent)){b.click();return true}})}});
-function privacyFooter(){var f=h("footer",{class:"site-footer"},[h("p",{text:T("Preview only — not for class use yet. Progress stays on this device. This site does not collect names, emails, phone numbers or LRNs. Ask Mar questions aren't saved.","Preview lang — hindi pa para sa klase. Sa device na ito lang ang progress. Hindi kumukuha ang site ng pangalan, email, numero o LRN. Hindi sine-save ang mga tanong kay Ask Mar.")})]);document.body.appendChild(f)}
+function privacyFooter(){var f=h("footer",{class:"site-footer"},[h("p",{text:T("Preview only — not for class use yet. Progress stays on this device. This site does not collect names, emails, phone numbers or LRNs. Ask Mar questions aren't saved.","Preview lang — hindi pa para sa klase. Sa device na ito lang ang progress. Hindi kumukuha ang site ng pangalan, email, numero o LRN. Hindi sine-save ang mga tanong kay Ask Mar.")}),h("p",{text:T("This site is hosted on GitHub Pages, which may log visitors' IP addresses. We don't collect anything.","Naka-host ang site na ito sa GitHub Pages, na maaaring mag-log ng IP address ng bisita. Wala kaming kinokolekta.")})]);document.body.appendChild(f)}
 document.addEventListener("DOMContentLoaded",function(){mergeFaqFil();maybeLoadFaqFil();document.documentElement.lang=fil?"fil":"en";header();var m=document.getElementById("main");var pg=document.body.dataset.page;(P[pg]||P.home)(m);
  if(pg!="ask"){var side=h("aside",{class:"ask-side","aria-label":"Ask Mar"});document.body.appendChild(side);mountAsk(side);document.body.classList.add("with-ask")}privacyFooter();});
 })();

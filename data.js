@@ -281,3 +281,6 @@ RA2.help={
  bantayBataFallback:"https://abs-cbncares.org/ways-to-give/programs/child-welfare/bantay-bata-helpline",
  tested:{ncmhSmart:"",ncmhGlobe:"",ncmhTollFree:"",bantayBata:"",e911:"",pnpAcg:""}
 };
+
+/* Set to false after the review in NATIVE-SPEAKER-REVIEW.md is signed off, so the draft note beside the language toggle comes off. */
+RA2.filipinoDraft=true;

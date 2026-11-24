@@ -165,3 +165,6 @@ html{scroll-padding-bottom:76px}
   .ask-full .chat{padding-bottom:240px}
 }
 .unverified-note{margin:.35rem 0 .7rem;padding:.45rem .65rem;border:1px dashed #0f766e;border-radius:8px;background:#f0fdfa;color:#134e4a;font-weight:700;font-size:.9rem}
+.header-actions{flex-wrap:wrap;align-items:center;gap:.4rem}
+.fil-draft-note{font-size:.72rem;font-weight:700;color:#134e4a;line-height:1.25;max-width:9.5rem}
+.site-footer p+p{margin-top:.55rem}

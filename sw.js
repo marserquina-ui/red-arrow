@@ -1,5 +1,5 @@
 /* Offline cache for the Red Arrow static site (GitHub Pages at /red-arrow/). */
-const CACHE = "red-arrow-hub-v13";
+const CACHE = "red-arrow-hub-v14";
 const ASSETS = [
   "./art/alert-panel.svg",
   "./art/art-index.js",
@@ -90,15 +90,16 @@ const ASSETS = [
   "./index.html",
   "./lesson.html",
   "./manifest.webmanifest",
+  "./offline.html",
   "./practice.html",
   "./profile.html",
   "./sim-ui.js",
   "./sim.html",
   "./sims-v3.js",
+  "./sw.js",
   "./teacher.html",
   "./v2.css",
-  "./v2.js",
-  "./offline.html"
+  "./v2.js"
 ];
 
 self.addEventListener("install", function (event) {
