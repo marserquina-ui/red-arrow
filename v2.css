@@ -507,3 +507,27 @@ html[data-theme="dark"] .cr-safety{border-color:var(--muted)}
 .deep-show{position:fixed;inset:0;z-index:60;background:var(--paper,#fff);display:flex;align-items:center;justify-content:center;padding:1rem}
 .deep-show-in{max-width:40rem;width:100%}.deep-show-t{font-size:1.4rem;white-space:pre-wrap;color:var(--ink)}
 .deep-help p{margin:.4rem 0}
+.home-hero{background:#0e1730;color:#eef2f8;border-radius:16px;padding:16px 16px 20px;margin:0 0 1.5rem}
+.home-hero h1{color:#eef2f8;margin:.6rem 0 .25rem;font-size:clamp(1.5rem,5vw,2.1rem);letter-spacing:-.02em}
+.home-hero p{color:#cbd5e1;margin:0 0 .5rem;max-width:36rem}
+.home-map{display:block;width:100%;height:auto;max-height:240px;object-fit:contain}
+.home-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1rem}
+.home-help-link{background:none;border:0;color:#5eead4;font:inherit;font-weight:700;text-decoration:underline;min-height:48px;cursor:pointer;padding:0}
+.home-mission{border-left:6px solid var(--red);padding:.25rem 0 .25rem 1rem;margin:0 0 1.75rem}
+.mission-text{font-size:1.15rem;line-height:1.55;margin:0 0 .75rem;max-width:40rem}
+.trust-list{list-style:none;padding:0;margin:0;display:grid;gap:.4rem}
+.trust-list li{padding-left:1.5rem;position:relative}
+.trust-list li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:800}
+.home-courses,.home-steps,.home-next,.home-staff{margin:0 0 1.75rem}
+.home-course,.home-next .card{margin:0 0 .75rem}
+.home-course a:not(.btn),.home-steps a{display:inline-flex;align-items:center;min-height:48px;font-weight:700}
+.home-steps ol{padding-left:0;list-style:none;display:grid;gap:.6rem}
+.home-steps li{display:flex;flex-wrap:wrap;gap:.25rem .6rem;align-items:flex-start}
+.home-steps li .ui-ic{margin:.1rem 0 0}
+.home-staff .btn{margin:.5rem 0 .25rem}
+.home-fold{border-top:1px solid var(--line);padding:.25rem 0}
+.home-fold summary{min-height:48px;display:flex;align-items:center;font-weight:700;cursor:pointer}
+@media (min-width:768px){
+  .home-courses .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .home-next{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+}
