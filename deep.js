@@ -69,7 +69,7 @@ W.RA2DeepRender=function(m,id,A){
   var left=d.qs.length;d.qs.forEach(function(q,k){pr.appendChild(mcq(q,k,T("Question ","Tanong ")+(k+1)+"/"+d.qs.length,function(){left--;if(!left){A.up(id,stats.ok===d.qs.length?3:2)}}))});
   if(d.written)m.appendChild(written(d.written,0));
   var gd=h("section",{class:"card deep-sec"},[h("h2",{text:T("Go deeper","Palalimin pa")})]);
-  if(d.deeper.concept){gd.appendChild(H("h3",{},"🧠 "+d.deeper.concept.h));gd.appendChild(blk(d.deeper.concept.t))}
+  if(d.deeper.concept){gd.appendChild(H("h3",{},"🧠 "+(d.deeper.concept.h||T("Key idea","Pangunahing ideya"))));gd.appendChild(blk(d.deeper.concept.t))}
   d.deeper.qs.forEach(function(q,k){gd.appendChild(mcq(q,k,T("Harder question ","Mas mahirap na tanong ")+(k+1)))});
   var hd=d.deeper.hands;if(hd){gd.appendChild(h("h3",{text:"🛠️ "+T("Hands-on","Gawain")+" "+String(hd.h||"").replace(/<[^>]+>/g,"")}));gd.appendChild(blk(hd.t));checks(gd,hd.ck)}
   m.appendChild(gd);
