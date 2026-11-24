@@ -167,6 +167,7 @@ html[data-theme="dark"] .draft-banner{background:var(--soft-bg);color:var(--soft
 .course-grid{display:grid;gap:16px;align-items:start}
 .card.course-card{padding:16px;border-radius:16px;margin:0}
 .course-cover{width:100%;max-width:100%;height:auto;aspect-ratio:640/240;border-radius:12px;margin:0 0 .5rem;border:1px solid var(--line);background:var(--paper)}
+@media (max-width:767px){.course-cover{max-height:120px;height:120px;aspect-ratio:auto;object-fit:cover;object-position:center top}}
 html[data-theme="dark"] .course-cover{background:#f4efe8;border-color:#33405c;filter:brightness(.9)}
 .course-title{font-family:var(--font);font-size:1.25rem;font-weight:750;line-height:1.3;letter-spacing:-.02em;margin:.2rem 0 0}
 .course-count{margin:0;font-size:1rem;line-height:1.4;color:var(--muted)}
@@ -326,6 +327,9 @@ html[data-theme="dark"] .sim-art,html[data-theme="dark"] .router-fig{background:
   .fil-draft-note{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
   .header-tool .tool-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .header-tool.nav-toggle,.header-tool.theme-toggle{width:48px;min-width:48px;min-height:48px;padding:0;justify-content:center;gap:0}
+  .header-tool.lang-toggle{width:48px;min-width:48px;padding:.15rem 0;justify-content:center;align-items:center;gap:0;flex-direction:column}
+  .header-tool.lang-toggle .ui-ic{width:20px;height:20px}
+  .header-tool.lang-toggle .tool-label{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:nowrap;border:0;font-size:.62rem;font-weight:800;line-height:1;letter-spacing:.02em}
   .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:50;box-shadow:0 -4px 16px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom,0)}
   .tab-link.is-active::before{top:-.3rem}
   .site-footer{margin-bottom:calc(var(--tab-h) + 1rem)}
@@ -441,6 +445,11 @@ html:not([data-theme="dark"]) .btn.is-wait,html:not([data-theme="dark"]) .btn[ar
 /* 911 hotlines stay white on #7a160f in every theme */
 html[data-theme="dark"] .overlay .btn-solid,html[data-theme="dark"] .overlay a.btn-solid{background:#7a160f!important;color:#fff!important}
 .overlay .btn-solid.big,.overlay a.btn-solid{background:#7a160f;color:#fff;min-height:48px;min-width:48px;font-family:var(--font)}
+/* NCMH and Bantay Bata (and other cream help actions): cream fill, rust outline >=3:1 vs the card */
+.overlay a.btn-outline.help-outline,.overlay .btn-outline.big.help-outline{background:#fff7ed;color:#7a160f;border:2px solid #7a160f;font-family:var(--font)}
+.overlay a.btn-outline.help-outline:hover,.overlay a.btn-outline.help-outline:focus,.overlay .btn-outline.big.help-outline:hover,.overlay .btn-outline.big.help-outline:focus{background:#ffedd5;color:#7a160f;border-color:#7a160f}
+html[data-theme="dark"] .overlay a.btn-outline.help-outline,html[data-theme="dark"] .overlay .btn-outline.big.help-outline{background:#fff7ed;color:#7a160f;border-color:#7a160f}
+.overlay .help-outline .ui-ic{filter:none}
 
 .overlay .help-btn-copy{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;min-width:0;flex:1 1 auto;text-align:left}
 .overlay .help-btn-label{white-space:normal}

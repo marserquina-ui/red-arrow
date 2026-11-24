@@ -73,12 +73,12 @@ function teacherCard(opts){
   h("p",{class:"overlay-label",text:T("NCMH Crisis Hotline (24/7)","NCMH Crisis Hotline (24/7)")})]
   .concat(pending?[unverifiedNote()]:[])
   /* Guidance office must test each number before launch and record the date (see RA2.help.tested). */
-  .concat(H.ncmh.map(function(n){return h("a",{class:"btn btn-outline big",href:"tel:"+n.tel},[ico("phone",""),h("span",{class:"help-btn-copy"},[h("span",{class:"help-btn-label",text:T("Call NCMH","Tawagan ang NCMH")+" ("+n.label+")"}),h("span",{class:"help-tel",text:fmtNcmh(n.tel)})])])}))
+  .concat(H.ncmh.map(function(n){return h("a",{class:"btn btn-outline big help-outline",href:"tel:"+n.tel},[ico("phone",""),h("span",{class:"help-btn-copy"},[h("span",{class:"help-btn-label",text:T("Call NCMH","Tawagan ang NCMH")+" ("+n.label+")"}),h("span",{class:"help-tel",text:fmtNcmh(n.tel)})])])}))
   .concat([
-  h("a",{class:"btn btn-outline big",href:H.bantayBataUrl||H.bantayBataFallback,target:"_blank",rel:"noopener noreferrer"},[ico("message",""),T("Message Bantay Bata","Mag-message sa Bantay Bata")]),
+  h("a",{class:"btn btn-outline big help-outline",href:H.bantayBataUrl||H.bantayBataFallback,target:"_blank",rel:"noopener noreferrer"},[ico("phone",""),T("Message Bantay Bata","Mag-message sa Bantay Bata")]),
   pending?unverifiedNote():null,
   h("p",{class:"overlay-label",text:T("Online threats, sextortion or a stolen account","Online na banta, sextortion o nanakaw na account")}),
-  h("a",{class:"btn btn-outline big",href:"tel:"+H.pnpAcg.tel},[ico("shield",""),h("span",{class:"help-btn-copy"},[h("span",{class:"help-btn-label",text:"PNP Anti-Cybercrime Group"}),h("span",{class:"help-tel",text:H.pnpAcg.display})])]),
+  h("a",{class:"btn btn-outline big help-outline",href:"tel:"+H.pnpAcg.tel},[ico("shield",""),h("span",{class:"help-btn-copy"},[h("span",{class:"help-btn-label",text:"PNP Anti-Cybercrime Group"}),h("span",{class:"help-tel",text:H.pnpAcg.display})])]),
   pending?unverifiedNote():null,
   /* DepEd Order 40 route for bullying */
   guideBtn,guideNote,
@@ -113,12 +113,12 @@ function header(){var shell=document.getElementById("shell-header");if(shell)she
  if(lsGet("ra-proj","0")==="1")document.body.classList.add("projector");applyTheme(currentTheme());
  var pg=document.body.dataset.page||"home",sect={home:"index.html",lesson:"index.html",sim:"index.html",practice:"index.html",ask:"ask.html",profile:"profile.html",teacher:"teacher.html",about:"about.html"}[pg]||"index.html";
  var nav=[["index.html","learn",T("Learn","Aralin")],["ask.html","ask-mar","Ask Mar"],["profile.html","me",T("Me","Ako")],["teacher.html","teacher",T("Teacher","Guro")]];
- var langBtn=h("button",{type:"button",class:"nav-toggle header-tool","aria-label":fil?T("Switch to English","Lumipat sa English"):T("Switch to Filipino","Lumipat sa Filipino"),title:fil?"English":"Filipino",onclick:function(){uiState({});lsSet("ra-lang",fil?"en":"fil");location.reload()}},[ico("language",""),h("span",{class:"tool-label","aria-hidden":"true",text:fil?"EN":"Fil"})]);
+ var langBtn=h("button",{type:"button",class:"nav-toggle header-tool lang-toggle","aria-label":fil?T("Switch to English","Lumipat sa English"):T("Switch to Filipino","Lumipat sa Filipino"),title:fil?"English":"Filipino",onclick:function(){uiState({});lsSet("ra-lang",fil?"en":"fil");location.reload()}},[ico("language",""),h("span",{class:"tool-label","aria-hidden":"true",text:fil?"EN":"FIL"})]);
  var _dark=currentTheme()==="dark";
  var themeLab=_dark?T("Light","Maliwanag"):T("Dark","Madilim");
  var themeBtn=h("button",{type:"button",class:"btn btn-outline theme-toggle nav-toggle header-tool","aria-pressed":_dark?"true":"false","aria-label":_dark?T("Switch to light theme","Lumipat sa maliwanag na tema"):T("Switch to dark theme","Lumipat sa madilim na tema"),title:themeLab,onclick:function(){var next=currentTheme()==="dark"?"light":"dark";lsSet("ra-theme",next);applyTheme(currentTheme());var d=currentTheme()==="dark";this.setAttribute("aria-pressed",d?"true":"false");var lab=d?T("Light","Maliwanag"):T("Dark","Madilim");this.title=lab;this.setAttribute("aria-label",d?T("Switch to light theme","Lumipat sa maliwanag na tema"):T("Switch to dark theme","Lumipat sa madilim na tema"));var s=this.querySelector(".tool-label");if(s)s.textContent=lab}},[h("span",{class:"theme-ic","aria-hidden":"true"}),h("span",{class:"tool-label","aria-hidden":"true",text:themeLab})]);
  var askBtn=pg!=="ask"?h("button",{type:"button",class:"btn btn-outline header-tool ask-toggle","aria-expanded":"false","aria-controls":"ask-side",onclick:function(){setAskOpen(!document.body.classList.contains("ask-open"),true)}},[ico("ask-mar",""),h("span",{text:"Ask Mar"})]):null;
- var helpHdr=h("button",{type:"button",class:"btn btn-outline header-tool help-toggle","aria-label":T("Need help? Get help from a person","Kailangan ng tulong? Humingi ng tulong sa tao"),title:T("Need help?","Kailangan ng tulong?"),onclick:function(){teacherCard()}},[ico("help",""),h("span",{class:"tool-label",text:T("Need help?","Kailangan ng tulong?")})]);
+ var helpHdr=h("button",{type:"button",class:"btn btn-outline header-tool help-toggle","aria-label":"Need help? / Kailangan ng tulong?",title:T("Need help?","Kailangan ng tulong?"),onclick:function(){teacherCard()}},[ico("help",""),h("span",{class:"tool-label",text:T("Need help?","Kailangan ng tulong?")})]);
  var aboutLnk=h("a",{class:"about-link about-link-hdr",href:"about.html",text:T("About this site","Tungkol sa site")});if(pg==="about")aboutLnk.setAttribute("aria-current","page");
  var skip=h("a",{class:"skip-link",href:"#main",text:T("Skip to content","Laktawan papunta sa nilalaman")});
  var tabs=h("ul",{class:"tabbar-list"},nav.map(function(n){var on=n[0]===sect,a={href:n[0],class:"tab-link"+(on?" is-active":"")};if(on)a["aria-current"]=(pg==="lesson"||pg==="sim"||pg==="practice")?"true":"page";return h("li",{class:n[0]==="ask.html"?"tab-ask":""},[h("a",a,[ico(n[1],""),h("span",{class:"tab-label",text:n[2]})])])}));
