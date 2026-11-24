@@ -365,7 +365,8 @@
           role: "listitem",
           "aria-label": api.T.apply(null, catLab[cat]) + ", " + (filled ? filled.name + ", ₱" + filled.price : api.T("empty", "walang laman")),
           onclick: function () {
-            if (selected && selected.category === cat) { slots[cat] = selected; selected = null; render(); }
+            if (selected && selected.category === cat) { slots[cat] = selected; selected = null; render(); return; }
+            if (filled && !selected) { slots[cat] = null; render(); }
           }
         });
         slot.appendChild(api.h("strong", { text: api.T.apply(null, catLab[cat]) }));
@@ -407,6 +408,7 @@
       bar.appendChild(meter);
       syncBudgetLine(used, left, over);
       announceChanges(used, left);
+      persistSlots();
     }
     function leftLabel(left, over) {
       return over
@@ -452,8 +454,38 @@
       });
       live.textContent = bits.join(". ") + ", " + leftLabel(left, left < 0);
     }
+    function persistSlots() {
+      var map = {};
+      cats.forEach(function (cat) { if (slots[cat]) map[cat] = slots[cat].id; });
+      if (api.uiState) api.uiState({ slots: map });
+    }
+    function restoreSlots() {
+      var saved = api.uiState ? api.uiState() : {};
+      var map = saved && saved.slots;
+      if (!map) return false;
+      var any = false;
+      cats.forEach(function (cat) {
+        var part = map[cat] ? byId(map[cat]) : null;
+        if (part) { slots[cat] = part; prevSlots[cat] = part.id; any = true; }
+      });
+      return any;
+    }
+    function statusAria(left, over) {
+      if (!live) return;
+      var names = [];
+      cats.forEach(function (cat) { if (slots[cat]) names.push(api.T.apply(null, catLab[cat])); });
+      live.textContent = names.length
+        ? names.join(", ") + ", " + leftLabel(left, over)
+        : leftLabel(left, over);
+    }
+    var restored = restoreSlots();
     function syncBudget() { render(); }
     render();
+    if (restored) {
+      var used0 = spent(), left0 = ui.budget - used0, over0 = used0 > ui.budget;
+      statusAria(left0, over0);
+    }
+    persistSlots();
     return { unmount: function () { document.body.classList.remove("sim-pc"); var el = document.getElementById("pc-budget-live"); if (el && el.parentNode) el.parentNode.removeChild(el); }, syncBudget: syncBudget };
   }
 
