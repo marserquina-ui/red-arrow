@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#3b1f1a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 280 180">
+  <ellipse cx="140" cy="164" fill="#1c1917" fill-opacity=".14" stroke="none" rx="100" ry="10"/>
+  <ellipse cx="140" cy="166" fill="#1c1917" fill-opacity=".06" stroke="none" rx="70" ry="6"/>
+  <rect width="8" height="44" x="78" y="28" fill="#fff7ed" rx="4"/>
+  <rect width="8" height="44" x="194" y="28" fill="#fff7ed" rx="4"/>
+  <circle cx="82" cy="26" r="6" fill="#f5b301"/>
+  <circle cx="198" cy="26" r="6" fill="#f5b301"/>
+  <rect width="208" height="88" x="36" y="68" fill="#fff7ed" rx="18"/>
+  <path fill="#7a160f" stroke="none" d="M36 86c0-10 8-18 18-18h172c10 0 18 8 18 18v6H36z"/>
+  <path d="M36 86h208"/>
+  <rect width="164" height="32" x="58" y="104" fill="#1c1917" fill-opacity=".12" rx="10"/>
+  <circle id="light-power" cx="86" cy="120" r="9" fill="#0f766e"/>
+  <circle id="light-pon" cx="122" cy="120" r="9" fill="#c0392b"/>
+  <circle id="light-los" cx="158" cy="120" r="9" fill="#fff7ed"/>
+  <circle id="light-wifi" cx="194" cy="120" r="9" fill="#0f766e"/>
+  <rect width="16" height="10" x="214" y="138" fill="#1c1917" fill-opacity=".2" rx="2"/>
+  <rect width="22" height="8" x="50" y="138" fill="#1c1917" fill-opacity=".2" rx="2"/>
+</svg>

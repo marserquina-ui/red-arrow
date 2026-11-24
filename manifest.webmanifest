@@ -1,0 +1,25 @@
+{
+  "name": "Red Arrow AI & Cyber Hub",
+  "short_name": "Red Arrow Hub",
+  "description": "Free AI and cybersecurity lessons for students of Red Arrow High School, San Nicolas, Pangasinan.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fff8f3",
+  "theme_color": "#7a160f",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

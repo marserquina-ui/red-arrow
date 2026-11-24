@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#3b1f1a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 180 280">
+  <ellipse cx="90" cy="264" fill="#1c1917" fill-opacity=".14" stroke="none" rx="62" ry="10"/>
+  <ellipse cx="90" cy="266" fill="#1c1917" fill-opacity=".06" stroke="none" rx="42" ry="6"/>
+  <rect width="124" height="248" x="28" y="12" fill="#fff7ed" rx="24"/>
+  <rect width="28" height="6" x="72" y="24" fill="#1c1917" fill-opacity=".2" stroke="none" rx="3"/>
+  <circle cx="108" r="3" fill="#1c1917" fill-opacity=".25" stroke="none"/>
+  <rect width="100" height="198" x="40" y="40" fill="#fff7ed" rx="12"/>
+  <g id="rows">
+    <rect width="84" height="28" x="48" y="52" fill="#1c1917" fill-opacity=".06" rx="8"/>
+    <rect width="84" height="28" x="48" y="88" fill="#1c1917" fill-opacity=".06" rx="8"/>
+    <rect width="84" height="28" x="48" y="124" fill="#1c1917" fill-opacity=".06" rx="8"/>
+    <rect width="84" height="28" x="48" y="160" fill="#c0392b" fill-opacity=".16" rx="8"/>
+    <path fill="#c0392b" stroke="none" d="M118 164h14v14l-4-3-3 3z"/>
+    <rect width="70" height="28" x="48" y="196" fill="#1c1917" fill-opacity=".06" rx="8"/>
+  </g>
+  <rect width="32" height="5" x="74" y="244" fill="#1c1917" fill-opacity=".25" stroke="none" rx="2.5"/>
+</svg>

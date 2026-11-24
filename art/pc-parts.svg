@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#3b1f1a" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 280 200">
+  <g id="part-cpu">
+    <ellipse cx="64" cy="92" fill="#1c1917" fill-opacity=".14" stroke="none" rx="40" ry="7"/>
+    <rect width="72" height="72" x="28" y="20" fill="#fff7ed" rx="12"/>
+    <rect width="48" height="48" x="40" y="32" fill="#f5b301" rx="8"/>
+    <rect width="28" height="28" x="50" y="42" fill="#fff7ed" rx="4"/>
+    <path d="M44 32v-6m40 6v-6M44 80v6m40-6v6M32 44h-6m6 24h-6m74-24h6m-6 24h6"/>
+  </g>
+  <g id="part-ram">
+    <ellipse cx="210" cy="72" fill="#1c1917" fill-opacity=".14" stroke="none" rx="52" ry="7"/>
+    <rect width="124" height="40" x="148" y="28" fill="#fff7ed" rx="8"/>
+    <rect width="20" height="16" x="160" y="36" fill="#0f766e" rx="3"/>
+    <rect width="20" height="16" x="186" y="36" fill="#0f766e" rx="3"/>
+    <rect width="20" height="16" x="212" y="36" fill="#0f766e" rx="3"/>
+    <rect width="20" height="16" x="238" y="36" fill="#0f766e" rx="3"/>
+    <path d="M156 68h108"/>
+  </g>
+  <g id="part-board">
+    <ellipse cx="78" cy="180" fill="#1c1917" fill-opacity=".14" stroke="none" rx="58" ry="8"/>
+    <rect width="116" height="68" x="20" y="112" fill="#fff7ed" rx="12"/>
+    <rect width="36" height="36" x="36" y="126" fill="#0f766e" fill-opacity=".35" rx="6"/>
+    <rect width="20" height="20" x="44" y="134" fill="#fff7ed" rx="4"/>
+    <rect width="38" height="12" x="84" y="126" fill="#f5b301" rx="3"/>
+    <rect width="38" height="8" x="84" y="146" fill="#7a160f" rx="2"/>
+    <path d="M36 170h84"/>
+  </g>
+  <g id="part-ssd">
+    <ellipse cx="210" cy="180" fill="#1c1917" fill-opacity=".14" stroke="none" rx="50" ry="8"/>
+    <rect width="100" height="52" x="160" y="124" fill="#fff7ed" rx="10"/>
+    <rect width="56" height="28" x="172" y="136" fill="#1c1917" fill-opacity=".08" rx="4"/>
+    <rect width="14" height="20" x="236" y="140" fill="#f5b301" rx="2"/>
+  </g>
+</svg>
