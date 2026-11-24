@@ -1,4 +1,3 @@
-
 (function(){
 var D=RA2,K="ra2";if(typeof RA2SIMS_V3!=="undefined")D.sims=RA2.sims=RA2SIMS_V3;
  if(window.RA2Art){D.diagramFiles=RA2Art.diagramFiles||D.diagramFiles;D.art=D.art||{};D.art.captions=RA2Art.captions||D.art.captions}
@@ -374,3 +373,4 @@ function boot(){mergeFaqFil();document.documentElement.lang=fil?"fil":"en";heade
  if(pg!="ask"){var side=h("aside",{class:"ask-side",id:"ask-side","aria-label":"Ask Mar"});document.body.appendChild(side);mountAsk(side,true);setAskOpen(lsGet("ra-ask","0")==="1")}
  (P[pg]||P.home)(m);privacyFooter()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+})();
