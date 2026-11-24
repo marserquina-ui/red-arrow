@@ -161,75 +161,8 @@ function renderCareers(m){
  bar.addEventListener("keydown",function(e){var n=btns.length,i=cur;if(e.key==="ArrowRight")i=(cur+1)%n;else if(e.key==="ArrowLeft")i=(cur-1+n)%n;else if(e.key==="Home")i=0;else if(e.key==="End")i=n-1;else return;e.preventDefault();e.stopPropagation();sel(i,true,true)});
  m.appendChild(bar);panels.forEach(function(p){m.appendChild(p)});m.appendChild(h("p",{class:"muted cr-offline",text:T("This page works offline. The links need internet.","Gumagana ang page na ito kahit offline. Kailangan ng internet ang mga link.")}));sel(cur,false)}
 var P={
-home:function(m){
- m.classList.add("home");
- function lessonIdsOf(qid){var Q=D.quizzes[qid]||{};var l=(Q.lessons||[]).slice();(Q.qs||[]).forEach(function(x){if(x.lesson&&l.indexOf(x.lesson)<0)l.push(x.lesson)});return l}
- var flat=[];D.modules.forEach(function(mod){mod.items.forEach(function(it){flat.push({it:it,mod:mod})})});
- function lv0(id){return st.m[id]||0}
- function nextUp(){var core=flat.filter(function(x){return x.it.type==="lesson"||x.it.type==="sim"});
-  var anyStarted=core.some(function(x){return lv0(x.it.id)>0});
-  if(st.last){var cur=core.filter(function(x){return x.it.id===st.last})[0];if(cur&&lv0(cur.it.id)<2)return {x:cur,mode:"resume"}}
-  var nx=core.filter(function(x){return lv0(x.it.id)<2})[0];if(nx)return {x:nx,mode:anyStarted?"next":"start"};
-  var qz=flat.filter(function(x){return x.it.type==="quiz"&&lessonIdsOf(x.it.id).some(function(l){return lv0(l)<3})})[0];if(qz)return {x:qz,mode:"quiz"};
-  return {mode:"done"}}
- function itemTitle(it,mod){return it.type==="unit"?T("Unit test","Unit test")+": "+T(mod.title,mod.fil):title(it.type,it.id)}
- function kindLabel(t){return t==="lesson"?T("Lesson","Aralin"):t==="sim"?T("Simulation","Simulasyon"):t==="quiz"?"Quiz":T("Unit test","Unit test")}
- var top=h("div",{class:"home-top"});m.appendChild(top);
- top.appendChild(h("h1",{class:"sr-live",text:T("Red Arrow Hub — Learn","Red Arrow Hub — Aralin")}));
- /* Search: lesson matches update while typing (local only); Ask Mar answers on submit, after the safety check. */
- var dest=h("div",{id:"home-ask-results",class:"home-ask-results","aria-live":"polite"});
- var live=h("div",{class:"home-live"}),liveStatus=h("p",{class:"sr-live",role:"status"});
- var inpHome=h("input",{class:"home-ask-in",type:"search",autocomplete:"off",autocorrect:"off",spellcheck:"false","aria-label":T("Ask Mar or search lessons","Magtanong kay Mar o maghanap ng aralin"),placeholder:T("Ask Mar or search lessons","Magtanong kay Mar o maghanap")});
- var timer=null;
- function liveSearch(){var v=inpHome.value.trim();live.innerHTML="";crisisBox.innerHTML="";crisisBox.hidden=true;if(v.length<3){liveStatus.textContent="";return}
-  var g=runAskSafety(v);
-  if(g.closed||(g.verdict&&(g.verdict.label==="crisis"||g.verdict.label==="harmful"))){
-    liveStatus.textContent="";
-    crisisBox.hidden=false;
-    crisisBox.appendChild(h("button",{type:"button",class:"btn need-help-btn home-live-help","aria-label":"Need help? / Kailangan ng tulong?",onclick:function(){teacherCard()}},[ico("help",""),"Need help? / Kailangan ng tulong?"]));
-    crisisBox.appendChild(h("p",{class:"home-crisis-note"},[h("span",{lang:"fil",text:"Hindi ka nag-iisa. May makakausap ka. "}),h("span",{lang:"en",text:"You're not alone. There's someone to talk to."})]));
-    return}
-  var hits=searchLessons(g.scrub.clean);
-  if(!hits.length){var none=T("No results","Walang nahanap");liveStatus.textContent=none;live.appendChild(h("p",{class:"muted home-live-empty",text:none}));live.appendChild(h("button",{type:"button",class:"btn btn-outline home-ask-opt",text:T("Ask Mar","Itanong kay Mar"),onclick:function(){if(form.requestSubmit)form.requestSubmit();else form.dispatchEvent(new Event("submit",{cancelable:true,bubbles:true}))}}));return}
-  liveStatus.textContent=hits.length+" "+T(hits.length===1?"lesson matches":"lessons match","na aralin ang tugma");
-  var ul=h("ul",{class:"home-ask-lessons"});hits.forEach(function(hit){ul.appendChild(h("li",{},[h("a",{href:"lesson.html?id="+encodeURIComponent(hit.id)},[ico("lesson",""),h("span",{text:T(hit.title,hit.titleFil||hit.title)})])]))});
-  live.appendChild(h("p",{class:"kicker",text:T("Matching lessons","Mga tugmang aralin")}));live.appendChild(ul)}
- inpHome.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(liveSearch,250)});
- var form=h("form",{class:"home-ask",role:"search",autocomplete:"off",onsubmit:function(e){e.preventDefault();clearTimeout(timer);live.innerHTML="";liveStatus.textContent="";var raw=inpHome.value;if(!raw.trim())return;if(window.RA2AskSubmit)window.RA2AskSubmit(raw,dest);else{dest.innerHTML="";teacherCard({fromAsk:true})}}});
- form.appendChild(inpHome);
- form.appendChild(h("button",{type:"submit",class:"btn btn-solid",text:T("Ask","Itanong")}));
- var crisisBox=h("div",{class:"home-crisis",hidden:"hidden"});var searchBlock=h("div",{class:"home-search-block"});searchBlock.appendChild(form);searchBlock.appendChild(crisisBox);top.appendChild(searchBlock);top.appendChild(liveStatus);top.appendChild(live);top.appendChild(dest);
- /* Continue card: reads only ra2 + this session's ra-ui. Hidden on a first visit. */
- var nu=nextUp();
- if(nu.mode!=="start"){
-  var cc=h("section",{class:"card continue-card","aria-labelledby":"continue-title"});
-  if(nu.mode==="done"){cc.appendChild(h("h2",{id:"continue-title",class:"continue-title",text:T("You finished every lesson. Nice work!","Natapos mo ang lahat ng aralin. Magaling!")}));cc.appendChild(h("p",{class:"muted",text:T("Try a unit test below, or ask Mar something new.","Subukan ang unit test sa ibaba, o magtanong kay Mar.")}))}
-  else{var it=nu.x.it,mod=nu.x.mod,label=T("Continue","Ituloy")+": "+itemTitle(it,mod)+continueStepLabel(it);
-   cc.appendChild(h("h2",{id:"continue-title",class:"sr-live",text:label}));
-   cc.appendChild(h("a",{class:"btn btn-solid continue-btn",href:href(it),text:label}))}
-  top.appendChild(cc);
- }
- /* Courses: summary up front, full list folded away */
- top.appendChild(h("h2",{class:"section-title",text:T("Your courses","Mga kurso mo")}));
- var openMap={};try{openMap=JSON.parse(lsGet("ra-open","{}"))||{}}catch(e){openMap={}}
- var progressMod=null;if(st.last){D.modules.forEach(function(mod){if(mod.items.some(function(it){return it.id===st.last}))progressMod=mod.id})}
- if(!progressMod){D.modules.forEach(function(mod){if(progressMod)return;if(mod.items.some(function(it){return (it.type==="lesson"||it.type==="sim")&&(st.m[it.id]||0)>0}))progressMod=mod.id})}
- var grid=h("div",{class:"course-grid"});m.appendChild(grid);
- D.modules.forEach(function(mod){var ids=mod.items.filter(function(x){return x.type==="lesson"||x.type==="sim"}).map(function(x){return x.id});var tot=ids.reduce(function(a,id){return a+(st.m[id]||0)},0),pct=Math.round(100*tot/(ids.length*4)),started=tot>0;
-  var nL=mod.items.filter(function(x){return x.type==="lesson"}).length,nS=mod.items.filter(function(x){return x.type==="sim"}).length;
-  var tag=mod.id==="cyber"?"tag-cyber":mod.id==="it"?"tag-it":"tag-ai";
-  var cover=h("img",{class:"course-cover",src:"art/courses/"+mod.id+".svg",alt:"",width:"640",height:"240"});
-  var titleEl=h("h3",{class:"course-title",text:T(mod.title,mod.fil)});
-  var count=h("p",{class:"course-count",text:nL+" "+T(nL===1?"lesson":"lessons",nL===1?"aralin":"na aralin")+" · "+nS+" "+T(nS===1?"sim":"sims","sim")});
-  var progress;
-  if(started){progress=h("div",{class:"course-progress"},[h("div",{class:"bar",role:"progressbar","aria-valuemin":"0","aria-valuemax":"100","aria-valuenow":String(pct),"aria-label":T(mod.title,mod.fil)+" — "+T("mastery","kasanayan")},[h("span",{style:"width:"+pct+"%"})]),h("small",{class:"muted",text:pct+"% "+T("mastery","kasanayan")})])}
-  else{var first=mod.items[0];progress=h("div",{class:"course-progress"},[h("p",{class:"muted course-new",text:T("Not started yet","Hindi pa nasisimulan")}),h("a",{class:"btn btn-outline course-start",href:href(first)},[h("span",{text:T("Start here","Magsimula rito")}),ico("next","")])])}
-  var askChip=h("button",{type:"button",class:"tag-chip "+tag,text:T("Ask Mar about this","Magtanong kay Mar tungkol dito"),onclick:function(){inpHome.value=T("Tell me about ","Sabihin mo tungkol sa ")+T(mod.title,mod.fil);inpHome.focus();window.scrollTo({top:0})}});
-  var startOpen=(openMap[mod.id]===true)||(openMap[mod.id]==null&&progressMod===mod.id);
-  var list=h("div",{class:"course-items"+(startOpen?" is-open":"")});if(!startOpen)list.setAttribute("hidden","");
-  var tog=h("button",{type:"button",class:"course-toggle","aria-expanded":startOpen?"true":"false",onclick:function(){var open=tog.getAttribute("aria-expanded")!=="true";tog.setAttribute("aria-expanded",open?"true":"false");list.classList.toggle("is-open",open);if(open)list.removeAttribute("hidden");else list.setAttribute("hidden","");openMap[mod.id]=open;lsSet("ra-open",JSON.stringify(openMap))}},[h("span",{text:T("See all ","Tingnan ang lahat ng ")+mod.items.length+" "+T("activities","gawain")})]);
-  mod.items.forEach(function(it){var lab=it.type==="sim"?T("Try it","Subukan")+" · ":it.type==="quiz"?"Quiz · ":"";list.appendChild(h("a",{class:"mrow "+it.type,href:href(it)},[h("span",{class:"ic"},[ico(icons[it.type]||"lesson","")]),h("span",{class:"t"},[h("strong",{text:itemTitle(it,mod)}),h("small",{text:lab+(it.type==="lesson"?T("Lesson","Aralin"):it.type==="sim"?T("Simulation","Simulasyon"):it.type==="unit"?T("Covers the whole module","Buong module"):(function(){var n=lessonIdsOf(it.id).length;return n===1?T("1 lesson","1 aralin"):(n||2)+" "+T("lessons","aralin")})())}),(it.type==="lesson"||it.type==="sim")?lvlTag(it.id):null])]))});
-  grid.appendChild(h("section",{class:"card course-card"},[cover,titleEl,count,progress,h("div",{class:"course-tags"},[askChip]),tog,list]))})},
+ /* Learn tab: learn.js (index.html only, v31) */
+home:function(m){if(window.RA2Learn)return RA2Learn(m,{D:D,st:st,T:T,h:h,title:title,href:href,ico:ico,lvlTag:lvlTag,lsGet:lsGet,lsSet:lsSet,runAskSafety:runAskSafety,searchLessons:searchLessons,teacherCard:teacherCard,continueStepLabel:continueStepLabel});m.appendChild(h("p",{class:"fb-soft",role:"alert",text:T("Lessons couldn't load. Check your connection, then reload the page.","Hindi ma-load ang mga aralin. Tingnan ang koneksyon, saka i-reload ang page.")}))},
 lesson:function(m0){var id=q("id"),L=D.lessons[id];if(!L)return notFound(m0);if(L.deep)return deep(m0,id);up(id,1);st.last=id;save(st);var i=Math.min((L.cards||[]).length-1,Math.max(0,uiState().lessonI||0));var pq=[];Object.keys(D.quizzes).forEach(function(k){D.quizzes[k].qs.forEach(function(x){if(x.lesson==id)pq.push(x)})});
  var grid=h("div",{class:"lesson-grid"+(pq.length?" has-practice":"")}),m=h("div",{class:"lesson-col"});m0.appendChild(grid);grid.appendChild(m);
  if(pq.length){var pc=h("aside",{class:"practice-col","aria-label":T("Practice","Pagsasanay")},[h("p",{class:"kicker",text:T("Practice this lesson","I-practice ang aralin")})]);var pb=h("div");pc.appendChild(pb);grid.appendChild(pc);runner(pb,pq,{onEnd:function(ok,n){pb.innerHTML="";pb.appendChild(h("p",{class:"fb-good",text:ok+"/"+n+" "+T("on the first try. The quiz counts toward mastery.","sa unang subok. Ang quiz ang bibilang sa mastery.")}))}})}

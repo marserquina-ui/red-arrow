@@ -1,5 +1,5 @@
 /* Offline cache for the Red Arrow static site (GitHub Pages at /red-arrow/). */
-const CACHE = "red-arrow-hub-v30";
+const CACHE = "red-arrow-hub-v31";
 const ASSETS = [
 "./",
 "./art/alert-panel.svg",
@@ -109,6 +109,8 @@ const ASSETS = [
 "./data.js",
 "./home.js",
 "./index.html",
+"./learn.css",
+"./learn.js",
 "./lesson.html",
 "./manifest.webmanifest",
 "./offline.html",

@@ -112,10 +112,6 @@ html[data-theme="dark"] .choice{background:var(--card)}
 .lvl.l3{background:var(--lvl3-bg);color:var(--lvl3-ink)}
 .lvl.l4{background:var(--lvl4-bg);color:var(--lvl4-ink);border-color:var(--lvl4-bg)}
 
-.tag-chip{display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:48px;padding:12px 14px;border-radius:8px;border:2px solid currentColor;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
-.tag-chip.tag-ai{background:var(--purple-fill);color:var(--purple-text)}
-.tag-chip.tag-cyber{background:var(--teal-fill);color:var(--teal-text)}
-.tag-chip.tag-it{background:var(--green-fill);color:var(--green-text)}
 
 .bar{height:8px;background:var(--track);border-radius:99px;overflow:hidden}
 .bar>span{display:block;height:100%;background:var(--red)}
@@ -157,40 +153,9 @@ html[data-theme="dark"] .draft-banner{background:var(--soft-bg);color:var(--soft
 .home-ask-lessons a .ui-ic{margin:0}
 .home-ask-lessons a:hover{border-color:var(--red);background:var(--hover-bg)}
 
-.continue-card{margin:.75rem 0 1.5rem;padding:18px 18px 20px;border-radius:16px;border-left:6px solid var(--red)}
-.continue-card .kicker{margin:0}
-.continue-title{font-size:1.3rem;line-height:1.3;margin:.15rem 0 .1rem;letter-spacing:-.02em}
-.continue-meta{margin:0 0 .4rem}
-.continue-btn{align-self:flex-start;gap:.5rem;padding-left:1.4rem;padding-right:1.1rem}
 
 .section-title{font-size:1.35rem;letter-spacing:-.02em;margin:0 0 .75rem}
-.course-grid{display:grid;gap:16px;align-items:start}
-.card.course-card{padding:16px;border-radius:16px;margin:0}
-.course-cover{width:100%;max-width:100%;height:auto;aspect-ratio:640/240;border-radius:12px;margin:0 0 .5rem;border:1px solid var(--line);background:var(--paper)}
-@media (max-width:767px){.course-cover{max-height:120px;height:120px;aspect-ratio:auto;object-fit:cover;object-position:center top}}
-html[data-theme="dark"] .course-cover{background:#f4efe8;border-color:#33405c;filter:brightness(.9)}
-.course-title{font-family:var(--font);font-size:1.25rem;font-weight:750;line-height:1.3;letter-spacing:-.02em;margin:.2rem 0 0}
-.course-count{margin:0;font-size:1rem;line-height:1.4;color:var(--muted)}
-.course-progress{margin:.35rem 0 0}
-.course-progress small{display:block;margin-top:.2rem}
-.course-progress .course-new{margin:0 0 .4rem}
-.course-start{gap:.45rem}
-.course-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.course-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;cursor:pointer;font:inherit;font-weight:700;color:var(--red-dark);background:transparent;border:0;border-radius:10px;padding:0 .4rem;margin-top:12px;text-align:left}
-.course-toggle::after{content:"";width:.6rem;height:.6rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .15s;flex:0 0 auto}
-.course-toggle[aria-expanded="true"]::after{transform:rotate(-135deg) translate(-2px,-2px)}
-.course-toggle:hover{background:var(--hover-bg)}
-html[data-theme="dark"] .course-toggle{color:var(--teal-text)}
-.course-items{margin-top:0;border-top:1px solid var(--line);padding-top:4px}
-.course-items[hidden]{display:none}
 
-.mrow{display:flex;align-items:center;gap:.7rem;padding:.75rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--card);margin:.45rem 0;text-decoration:none;color:inherit;min-height:56px}
-.mrow .ic{display:inline-flex;align-items:center;justify-content:center;width:2rem;flex:0 0 2rem}
-.mrow .ic .ui-ic{margin:0}
-.mrow .t{flex:1;min-width:0;overflow-wrap:anywhere}
-.mrow small{display:block;color:var(--muted)}
-.mrow .lvl{margin-top:.25rem}
-.mrow.sim{border-left:4px solid var(--teal)}.mrow.quiz{border-left:4px solid var(--gold)}.mrow.unit{border-left:4px solid var(--red)}
 
 /* ============ 7. Lessons, quizzes, runner ============ */
 .dots{display:flex;gap:6px;justify-content:center;margin:.5rem 0 1rem}
@@ -312,7 +277,6 @@ html[data-theme="dark"] .sim-art,html[data-theme="dark"] .router-fig{background:
 /* ============ 13. Layout by width ============ */
 @media (max-width:360px){
   .btn{padding:.6rem .8rem}
-  .mrow{gap:.4rem;padding:.6rem}.mrow .ic{width:1.6rem;flex-basis:1.6rem}
   main.wrap{padding-left:1rem;padding-right:1rem}
 }
 @media (max-width:767px){
@@ -363,10 +327,6 @@ html[data-theme="dark"] .sim-art,html[data-theme="dark"] .router-fig{background:
   .sim2 .scen .quiz-q{font-size:1.25rem}
   .pc-slots{grid-template-columns:repeat(2,1fr)}
   .tab-link.is-active::before{top:auto;bottom:-.3rem;border-radius:3px 3px 0 0}
-  .continue-card{display:grid;grid-template-columns:1fr auto;column-gap:1.5rem;align-items:center}
-  .continue-card>*{grid-column:1}
-  .continue-card .continue-btn{grid-column:2;grid-row:1/span 3;align-self:center}
-  .course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (min-width:1024px){
   .wrap{max-width:68rem}
@@ -380,9 +340,6 @@ html[data-theme="dark"] .sim-art,html[data-theme="dark"] .router-fig{background:
   body.ask-open .ask-side{display:block;position:fixed;top:0;right:0;bottom:0;width:340px;overflow:auto;background:var(--card);color:var(--ink);border-left:1px solid var(--line);padding:1rem;z-index:30;box-shadow:-8px 0 24px rgba(28,25,23,.06)}
   body.projector.ask-open{padding-right:400px}
   body.projector.ask-open .ask-side{width:400px}
-}
-@media (min-width:1280px){
-  body:not(.ask-open) .course-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
 /* ============ 14. Motion ============ */
@@ -399,12 +356,10 @@ html[data-theme="dark"] .sim-board,html[data-theme="dark"] .sim-board .muted,htm
 html[data-theme="dark"] .site-footer{background:#fff7ed}
 html[data-theme="dark"] .kicker{color:var(--pink-text)}
 html[data-theme="dark"] .sim-board .kicker,html[data-theme="dark"] div.quiz .kicker,html[data-theme="dark"] .scen .kicker{color:#9a3412}
-html[data-theme="dark"] .mrow{background:var(--card);color:var(--text);border-color:var(--teal-text)}
 html[data-theme="dark"] .lesson-credit{border-color:var(--pink-text);color:var(--text)}
 html[data-theme="dark"] .lesson-credit p,html[data-theme="dark"] .lesson-credit .license-tag{color:var(--text)}
 html[data-theme="dark"] .lesson-credit-links a{color:var(--teal-text)}
 .lesson-credit-links a,.lesson-deeper{display:inline-flex;align-items:center;min-height:48px;padding:.35rem .5rem}
-html[data-theme="dark"] .mrow img.ui-ic{filter:invert(1) hue-rotate(180deg) brightness(1.15)}
 /* Light surfaces in dark mode need a darker focus ring than --focus (#93c5fd). */
 html[data-theme="dark"] .sim-board :focus-visible,
 html[data-theme="dark"] div.quiz :focus-visible,
@@ -430,14 +385,6 @@ body[data-page="home"] .wrap{padding-top:.5rem}
 html[data-theme="dark"] .home-live-help,html[data-theme="dark"] .home-crisis .need-help-btn{background:#fff7ed;color:#7a160f;border-color:#7a160f}
 .home-crisis-note{margin:.3rem 0 0;padding:.25rem .45rem;background:#fff7ed;color:#1c1917;border-radius:8px;font-family:var(--font);font-size:.95rem;line-height:1.35;letter-spacing:normal}
 html[data-theme="dark"] .home-crisis-note{background:#fff7ed;color:#1c1917}
-.continue-card{padding:12px 14px}
-.continue-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;box-sizing:border-box;text-align:center;text-decoration:none;font-weight:700}
-@media (min-width:768px){
-  .continue-card{display:block}
-  .continue-card .continue-btn{grid-column:auto;grid-row:auto;width:100%}
-}
-html[data-theme="dark"] .continue-card{border-left-color:var(--kicker)}
-html:not([data-theme="dark"]) .mrow.quiz{border-left-color:#854d0e}
 html:not([data-theme="dark"]) .btn.is-wait,html:not([data-theme="dark"]) .btn[aria-disabled="true"]{border-color:#78716c}
 @media (max-width:767px){
   .header-tool.help-toggle{width:48px;min-width:48px;min-height:48px;padding:0;justify-content:center;gap:0}
@@ -579,14 +526,6 @@ html[data-theme="dark"] .news-chip[aria-pressed="true"]{background:var(--text);b
 .header-actions .header-tool .ui-ic,.header-actions .header-tool .theme-ic{width:20px;height:20px}
 .header-actions .header-tool .tool-label{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;font-size:.62rem;font-weight:800;line-height:1}
 .header-actions .help-toggle .tool-label{display:none}.help-toggle::before{content:attr(data-s);order:2;font-size:.62rem;font-weight:800;line-height:1}
-}
-@media (max-width:600px){
-.home .section-title{margin:.6rem 0 .5rem}.course-grid{gap:8px}.card.course-card{display:grid;grid-template-columns:56px minmax(0,1fr) auto;column-gap:10px;padding:8px 12px 2px;align-items:center}
-.course-card .course-cover{grid-area:1/1/3/2;width:56px;height:56px;max-height:56px;margin:0;object-position:60% 50%;border-radius:10px}
-.course-card .course-title{grid-area:1/2/2/4;font-size:1.05rem;margin:0}.course-card .course-count{grid-area:2/2;font-size:.8rem;line-height:1.2}
-.course-card .course-progress{grid-area:2/3;margin:0;text-align:right}.course-card .course-progress .bar{width:76px}
-.course-card .course-new,.course-card .course-tags{display:none}.course-card .course-start{min-height:48px;padding:0 .7rem}
-.course-card .course-toggle,.course-card .course-items{grid-column:1/-1;margin:0}.course-card .course-start{font-size:.92rem}
 }
 @media (max-width:480px){
 .deep-table table,.deep-table tbody,.deep-table tr,.deep-table td{display:block;width:auto}.deep-table tr:first-child{display:none}
