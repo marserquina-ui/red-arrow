@@ -41,14 +41,15 @@ function render(m,A){var h=A.h,T=A.T,D=A.D||{},fil=A.fil,uiState=A.uiState;
    if(fromCache==="offline")note("is-offline",T("You're offline. Open this page once with internet to get the news.","Offline ka. Buksan ang page na ito nang may internet minsan para makuha ang balita."));
    else note("is-empty",T("News isn't ready yet. Check back tomorrow morning.","Wala pang balita. Bumalik bukas ng umaga."));
    return}
-  updated.textContent=T("Updated "+manila(N.generated,true)+" · refreshes every morning","In-update "+manila(N.generated,true)+" · nire-refresh tuwing umaga");
+  updated.textContent=T("Updated "+manila(N.generated,true)+" PH time · refreshes every morning","In-update "+manila(N.generated,true)+" oras sa PH · nire-refresh tuwing umaga");
   if(N.paused){note("is-paused",T("News is paused by your teacher.","Naka-pause ng guro mo ang balita."));drawFoot(N);return}
   if(fromCache==="offline")note("is-offline",T("You're offline. Showing news from "+manila(N.generated,false)+".","Offline ka. Ipinapakita ang balita mula "+manila(N.generated,false)+"."));
   if(Date.now()-ms(N.generated)>48*3600000)note("is-stale",T("News didn't refresh today.","Hindi nag-refresh ang balita ngayon."));
   var items=(N.items||[]).slice().sort(function(a,b){return ms(b.published)-ms(a.published)});
   var bar=h("div",{class:"cr-tabs news-tabs",role:"tablist","aria-label":T("News sections","Mga seksyon ng balita")}),btns=[],panels=[];
-  var chips=h("div",{class:"news-chips",role:"group","aria-label":T("Region","Rehiyon")});
-  var chipBtns=REG.map(function(r){var b=h("button",{type:"button",class:"news-chip","aria-pressed":r[0]===region?"true":"false",text:r[1],onclick:function(){region=r[0];uiState({newsRegion:region});chipBtns.forEach(function(x,i){x.setAttribute("aria-pressed",REG[i][0]===region?"true":"false")});fill()}});chips.appendChild(b);return b});
+  /* v27: one compact Region dropdown instead of a second chip row */
+  var regSel=h("select",{id:"nw-region",class:"news-select",onchange:function(){region=regSel.value;uiState({newsRegion:region});fill()}},REG.map(function(r){var o=h("option",{value:r[0],text:r[1]});if(r[0]===region)o.selected=true;return o}));
+  var chips=h("div",{class:"news-chips news-region"},[h("label",{for:"nw-region",text:T("Region","Rehiyon")}),regSel]);
   TABS.forEach(function(t,i){var b=h("button",{type:"button",class:"cr-tab",role:"tab",id:"nwt-"+t[0],"aria-controls":"nwp-"+t[0],"aria-selected":"false",tabindex:"-1",text:t[1],onclick:function(){sel(i,false,true)}});
    var p=h("div",{class:"cr-panel news-panel",role:"tabpanel",id:"nwp-"+t[0],"aria-labelledby":"nwt-"+t[0],tabindex:"0",hidden:"hidden"});btns.push(b);panels.push(p);bar.appendChild(b)});
   bar.addEventListener("keydown",function(e){var n=btns.length,i=cur;if(e.key==="ArrowRight")i=(cur+1)%n;else if(e.key==="ArrowLeft")i=(cur-1+n)%n;else if(e.key==="Home")i=0;else if(e.key==="End")i=n-1;else return;e.preventDefault();e.stopPropagation();sel(i,true,true)});
