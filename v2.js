@@ -53,7 +53,7 @@ function teacherCard(){var H=D.help,pending=helpUnverified(),o=h("div",{class:"o
  pending?unverifiedNote():null,
  /* DepEd Order 40 route for bullying */
  h("button",{class:"btn btn-outline big",text:"🏫 "+T("Child Protection Committee / Guidance","Child Protection Committee / Guidance"),onclick:function(e){e.target.after(h("p",{class:"muted",text:H.guidance||T("Ask any teacher to take you to the guidance office or the Child Protection Committee today.","Magpasama sa kahit sinong guro papunta sa guidance office o Child Protection Committee ngayon.")}))}}),
- h("button",{class:"btn btn-ghost big",style:"color:var(--ink);border-color:var(--line)",text:T("Back to lessons","Bumalik sa mga aralin"),onclick:function(){o.remove();document.querySelectorAll(".ask-in").forEach(function(i){i.value=""});location.href="index.html"}})]));document.body.appendChild(o)}
+ h("button",{class:"btn btn-ghost big",style:"color:#1c1917;border-color:#e8e0d8",text:T("Back to lessons","Bumalik sa mga aralin"),onclick:function(){o.remove();document.querySelectorAll(".ask-in").forEach(function(i){i.value=""});location.href="index.html"}})]));document.body.appendChild(o)}
 window.RA2open=teacherCard;
 /* question runner: one at a time, progressive hints, check/try again, worked explanation */
 function runner(root,steps,opts){var saved=uiState(),i=Math.min(steps.length-1,Math.max(0,saved.step||0)),first=Array.isArray(saved.first)?saved.first.slice():[],pts=saved.pts||0;
@@ -73,23 +73,52 @@ function runner(root,steps,opts){var saved=uiState(),i=Math.min(steps.length-1,M
  if(!root._bound){root._bound=1;document.addEventListener("keydown",function(e){root._key&&root._key(e)})}
  function end(){root._key=null;var ok=first.filter(Boolean).length;uiState({step:0,pts:0,first:[]});if(opts&&opts.onEnd)opts.onEnd(ok,steps.length,pts,first)}
  show()}
-function header(){var nav=[["index.html","learn",T("Learn","Aralin")],["ask.html","ask-mar","Ask Mar"],["profile.html","me",T("Me","Ako")],["teacher.html","teacher",T("Teacher","Guro")]];
- var langBtn=h("button",{class:"nav-toggle",style:"display:inline-flex",onclick:function(){uiState({});localStorage.setItem("ra-lang",fil?"en":"fil");location.reload()}},[ico("language",""),document.createTextNode(fil?"EN":"Filipino")]);
+function currentTheme(){try{if(localStorage.getItem("ra-proj")==="1")return "light";var t=localStorage.getItem("ra-theme");if(t==="light"||t==="dark")return t}catch(e){}return (window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}
+function applyTheme(t){try{if(localStorage.getItem("ra-proj")==="1")t="light"}catch(e){}document.documentElement.setAttribute("data-theme",t||"light")}
+function searchLessons(q){function bag(s){return " "+String(s).toLowerCase().replace(/[^a-z0-9ñ]+/g," ").replace(/\s+/g," ").trim()+" "};var b=bag(q),hits=[];if(!b||!D.lessons)return hits;Object.keys(D.lessons).forEach(function(id){var L=D.lessons[id],blob=bag((L.title||"")+" "+(L.titleFil||"")+" "+((L.cards||[]).map(function(c){return (c.h||"")+" "+(c.hf||"")+" "+(c.t||"")+" "+(c.tf||"")}).join(" "))),s=0;b.trim().split(/\s+/).forEach(function(w){if(w.length>2&&blob.indexOf(w)>=0)s+=w.length});if(s>=3)hits.push({id:id,title:L.title,titleFil:L.titleFil,score:s})});hits.sort(function(a,c){return c.score-a.score});return hits.slice(0,6)}
+function header(){if(localStorage.getItem("ra-proj")==="1")document.body.classList.add("projector");applyTheme(currentTheme());var nav=[["index.html","learn",T("Learn","Aralin")],["ask.html","ask-mar","Ask Mar"],["profile.html","me",T("Me","Ako")],["teacher.html","teacher",T("Teacher","Guro")]];
+ var langBtn=h("button",{type:"button",class:"nav-toggle header-tool",style:"display:inline-flex","aria-label":fil?T("Switch to English","Lumipat sa English"):T("Switch to Filipino","Lumipat sa Filipino"),title:fil?"English":"Filipino",onclick:function(){uiState({});localStorage.setItem("ra-lang",fil?"en":"fil");location.reload()}},[ico("language",""),h("span",{class:"tool-label","aria-hidden":"true",text:fil?"EN":"Fil"})]);
+ var _dark=currentTheme()==="dark";
+ var themeLab=_dark?T("Light","Maliwanag"):T("Dark","Madilim");
+ var themeBtn=h("button",{type:"button",class:"btn btn-outline theme-toggle nav-toggle header-tool","aria-pressed":_dark?"true":"false","aria-label":_dark?T("Switch to light theme","Lumipat sa maliwanag na tema"):T("Switch to dark theme","Lumipat sa madilim na tema"),title:themeLab,onclick:function(){var next=currentTheme()==="dark"?"light":"dark";try{localStorage.setItem("ra-theme",next)}catch(e){}applyTheme(currentTheme());var d=currentTheme()==="dark";this.setAttribute("aria-pressed",d?"true":"false");var lab=d?T("Light","Maliwanag"):T("Dark","Madilim");this.title=lab;this.setAttribute("aria-label",d?T("Switch to light theme","Lumipat sa maliwanag na tema"):T("Switch to dark theme","Lumipat sa madilim na tema"));var s=this.querySelector(".tool-label");if(s)s.textContent=lab}},[h("span",{class:"theme-ic","aria-hidden":"true"}),h("span",{class:"tool-label","aria-hidden":"true",text:themeLab})]);
  var skip=h("a",{class:"skip-link",href:"#main",text:T("Skip to content","Laktawan papunta sa nilalaman")});
  var hd=h("header",{class:"site-header"},[h("div",{class:"header-inner"},[h("a",{class:"logo",href:"index.html",html:'<img src="assets/logo.svg" width="36" height="36" alt=""><span class="logo-text"><strong>Red Arrow Hub</strong><span>San Nicolas, Pangasinan</span></span>'}),
-  h("div",{class:"header-actions"},[langBtn,D.filipinoDraft?h("span",{class:"fil-draft-note",text:T("Filipino: draft, under teacher review","Burador pa, sinusuri ng guro")}):null])]),
+  h("div",{class:"header-actions"},[langBtn,themeBtn,D.filipinoDraft?h("span",{class:"fil-draft-note",text:T("Filipino: draft, under teacher review","Burador pa, sinusuri ng guro")}):null])]),
   h("nav",{"aria-label":"Main",class:"tabbar"},[h("ul",{style:"display:flex;justify-content:space-around;list-style:none;margin:0;padding:.3rem"},nav.map(function(n){return h("li",{class:n[0]=="ask.html"?"tab-ask":""},[h("a",{href:n[0],style:"display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;color:var(--ink);font-weight:600;font-size:.85rem;padding:.4rem .6rem;min-height:48px"},[ico(n[1],""),document.createTextNode(n[2])])])}))])]);
  document.body.prepend(hd);document.body.prepend(skip);if(D.filipinoDraft&&fil)document.body.prepend(h("div",{class:"draft-banner",style:"display:block",text:"Draft na salin — pakisuri ng native speaker."}));if(localStorage.getItem("ra-proj")==="1")document.body.classList.add("projector")}
 var P={
-home:function(m){m.appendChild(h("h1",{class:"page-title",text:T("Your courses","Mga kurso mo")}));
+home:function(m){
+ var dest=h("div",{id:"home-ask-results",class:"home-ask-results","aria-live":"polite"});
+ var inpHome=h("input",{class:"home-ask-in",type:"search",name:"q",autocomplete:"off","aria-label":T("Ask Mar or search lessons","Magtanong kay Mar o maghanap ng aralin"),placeholder:T("Ask Mar or search lessons","Magtanong kay Mar")});
+ var form=h("form",{class:"home-ask",role:"search",onsubmit:function(e){e.preventDefault();var raw=inpHome.value;if(window.RA2AskSubmit)window.RA2AskSubmit(raw,dest);else{dest.innerHTML="";teacherCard()}}});
+ form.appendChild(inpHome);
+ form.appendChild(h("button",{type:"submit",class:"btn btn-solid",text:T("Ask","Itanong")}));
+ m.appendChild(form);m.appendChild(dest);
+ m.appendChild(h("h1",{class:"page-title",text:T("Your courses","Mga kurso mo")}));
  D.modules.forEach(function(mod){var ids=mod.items.filter(function(x){return x.type=="lesson"||x.type=="sim"}).map(function(x){return x.id});var tot=ids.reduce(function(a,id){return a+(st.m[id]||0)},0),pct=Math.round(100*tot/(ids.length*4));
+  var nL=mod.items.filter(function(x){return x.type=="lesson"}).length,nS=mod.items.filter(function(x){return x.type=="sim"}).length;
+  var tag=mod.id==="cyber"?"tag-cyber":mod.id==="it"?"tag-it":"tag-ai";
   var cover=h("img",{class:"course-cover",src:"art/courses/"+mod.id+".svg",alt:T(mod.title,mod.fil)});
-  var sec=h("section",{class:"card",style:"margin:1rem 0"},[cover,h("h2",{text:T(mod.title,mod.fil)}),h("div",{class:"bar"},[h("span",{style:"width:"+pct+"%"})]),h("small",{class:"muted",text:pct+"% "+T("mastery","kasanayan")})]);
+  var titleEl=h("h2",{class:"course-title"});titleEl.appendChild(h("span",{class:"prompt-mark","aria-hidden":"true",text:">_ "}));titleEl.appendChild(document.createTextNode(T(mod.title,mod.fil)));
+  var count=h("p",{class:"course-count",text:nL+" "+T(nL===1?"lesson":"lessons",nL===1?"aralin":"na aralin")+" · "+nS+" "+T(nS===1?"sim":"sims","sim")});
+  var askChip=h("button",{type:"button",class:"tag-chip "+tag,text:T("Ask Mar about this","Magtanong kay Mar tungkol dito"),onclick:function(){inpHome.value=T("Tell me about ","Sabihin mo tungkol sa ")+T(mod.title,mod.fil);inpHome.focus()}});
+  var tags=h("div",{class:"course-tags"},[askChip]);
+  var sec=h("section",{class:"card course-card"},[cover,titleEl,count,h("div",{class:"bar"},[h("span",{style:"width:"+pct+"%"})]),h("small",{class:"muted",text:pct+"% "+T("mastery","kasanayan")}),tags]);
   mod.items.forEach(function(it){var lab=it.type=="sim"?T("Try it","Subukan")+" · ":it.type=="quiz"?"Quiz · ":"";sec.appendChild(h("a",{class:"mrow "+it.type,href:href(it)},[h("span",{class:"ic"},[ico(icons[it.type]||"lesson","")]),h("span",{class:"t"},[h("strong",{text:it.type=="unit"?T("Unit test","Unit test")+": "+T(mod.title,mod.fil):title(it.type,it.id)}),h("small",{text:lab+(it.type=="lesson"?T("Lesson","Aralin"):it.type=="sim"?T("Simulation","Simulasyon"):it.type=="unit"?T("Covers the whole module","Buong module"):(function(){var n=(D.quizzes[it.id]&&D.quizzes[it.id].lessons||[]).length;return n===1?T("1 lesson","1 aralin"):(n||2)+" "+T("lessons","aralin")})())}),(it.type=="lesson"||it.type=="sim")?lvlTag(it.id):null])]))});m.appendChild(sec)})},
 lesson:function(m0){var id=q("id"),L=D.lessons[id];if(!L)return notFound(m0);up(id,1);var i=Math.min((L.cards||[]).length-1,Math.max(0,uiState().lessonI||0));var pq=[];Object.keys(D.quizzes).forEach(function(k){D.quizzes[k].qs.forEach(function(x){if(x.lesson==id)pq.push(x)})});
  var grid=h("div",{class:"lesson-grid"+(pq.length?" has-practice":"")}),m=h("div",{class:"lesson-col"});m0.appendChild(grid);grid.appendChild(m);
  if(pq.length){var pc=h("aside",{class:"practice-col","aria-label":T("Practice","Pagsasanay")},[h("p",{class:"kicker",text:T("Practice this lesson","I-practice ang aralin")})]);var pb=h("div");pc.appendChild(pb);grid.appendChild(pc);runner(pb,pq,{onEnd:function(ok,n){pb.innerHTML="";pb.appendChild(h("p",{class:"fb-good",text:ok+"/"+n+" "+T("on the first try. The quiz counts toward mastery.","sa unang subok. Ang quiz ang bibilang sa mastery.")}))}})}
- m.appendChild(h("p",{class:"kicker",text:T("Lesson","Aralin")}));m.appendChild(h("h1",{class:"page-title",text:T(L.title,L.titleFil)}));var box=h("div");m.appendChild(box);
+ m.appendChild(h("p",{class:"kicker",text:T("Lesson","Aralin")}));m.appendChild(h("h1",{class:"page-title",text:T(L.title,L.titleFil)}));
+ if(L.license||L.credit){var cred=h("div",{class:"lesson-credit"});
+  if(L.license)cred.appendChild(h("p",{class:"license-tag",text:L.license+" · "+T("Not the site default license","Hindi ito ang default na lisensya ng site")}));
+  if(L.credit)cred.appendChild(h("p",{text:T(L.credit,L.creditFil||L.credit)}));
+  var links=h("p",{class:"lesson-credit-links"});
+  if(L.sourceUrl)links.appendChild(h("a",{href:L.sourceUrl,rel:"noopener noreferrer",target:"_blank",text:T("MIT OpenCourseWare 6.034","MIT OpenCourseWare 6.034")}));
+  if(L.licenseUrl){if(links.childNodes.length)links.appendChild(document.createTextNode(" · "));links.appendChild(h("a",{href:L.licenseUrl,rel:"noopener noreferrer",target:"_blank",text:"CC BY-NC-SA 4.0"}));}
+  cred.appendChild(links);
+  if(L.deeperUrl)cred.appendChild(h("a",{class:"btn btn-outline lesson-deeper",href:L.deeperUrl,rel:"noopener noreferrer",target:"_blank",text:T("Want to go deeper?","Gusto mo pang palalimin?")}));
+  m.appendChild(cred)}
+ var box=h("div");m.appendChild(box);
  function show(){uiState({lessonI:i});box.innerHTML="";if(L.cards.length>1)box.appendChild(h("div",{class:"dots"},L.cards.map(function(_,j){return h("i",{class:j<i?"on":j==i?"cur":""})})));var c=L.cards[i];
   box.appendChild(h("div",{class:"step-card"},[cardArt(id,i,c),h("p",{class:"kicker",text:T("Step ","Hakbang ")+(i+1)+"/"+L.cards.length}),h("h2",{text:T(c.h||c[1],c.hf)}),h("p",{text:T(c.t||c[2],c.tf)})]));
   var a=h("div",{class:"quiz-actions",style:"justify-content:space-between"});if(i>0)a.appendChild(h("button",{class:"btn btn-outline",text:T("Back","Bumalik"),onclick:function(){i--;show()}}));
@@ -175,6 +204,43 @@ m.appendChild(h("img",{class:"mar-face",src:"art/mar-avatar.svg",alt:T("Mar, the
   think=h("div",{class:"mar think"},[h("p",{text:T("Thinking…","Sandali…")})]);
   chat.appendChild(think);
   ensureFaqFil(afterFaq)}
+ window.RA2AskSubmit=function(raw,dest){
+  /* Same official run order as reply(): classify first, never store the question, fail closed. */
+  function clear(){if(dest)dest.innerHTML=""}
+  var gate=runAskSafety(raw);
+  if(gate.closed){clear();teacherCard();return {kind:"closed"}}
+  var scrub=gate.scrub,verdict=gate.verdict,q=scrub.clean,label=verdict.label;
+  if(label==="crisis"){clear();teacherCard();return {kind:"crisis"}}
+  if(label==="harmful"){
+    clear();
+    var ref=h("div",{class:"mar home-ask-refusal"});
+    ref.appendChild(h("p",{text:T("I can't help with that. I only answer questions about AI, IT and cyber safety.","Hindi ko iyon matutulongan. AI, IT at cyber safety lang ang sinasagot ko.")}));
+    if(dest)dest.appendChild(ref);
+    return {kind:"harmful"}}
+  function paintLessons(){
+    var hits=searchLessons(q);
+    if(!hits.length||!dest)return;
+    var ul=h("ul",{class:"home-ask-lessons"});
+    hits.forEach(function(hit){ul.appendChild(h("li",{},[h("a",{href:"lesson.html?id="+encodeURIComponent(hit.id),text:T(hit.title,hit.titleFil||hit.title)})]));});
+    dest.appendChild(ul)}
+  function afterHomeFaq(ok){
+    if(think&&think.parentNode)think.parentNode.removeChild(think);
+    clear();
+    if(!ok){
+      var miss=h("div",{class:"mar"});
+      miss.appendChild(h("p",{text:T("I couldn't load that answer. Please ask a teacher.","Hindi ko mai-load ang sagot. Magtanong sa guro.")}));
+      if(dest)dest.appendChild(miss);teacherCard();return}
+    var b=h("div",{class:"mar"});
+    if(label==="maybe"){showFaq(b,q,{allowOne:true});b.appendChild(h("button",{type:"button",class:"btn btn-outline happen-btn",text:T("Is this happening to you?","Nangyayari ba ito sa iyo?"),onclick:teacherCard}))}
+    else showFaq(b,q);
+    if(dest)dest.appendChild(b);
+    paintLessons()}
+  var think=null;
+  if(faqFilState==="ready"||window.RA2FaqFil){mergeFaqFil();faqFilState="ready";afterHomeFaq(true);return {kind:"ok"}}
+  if(faqFilState==="failed"){afterHomeFaq(false);return {kind:"fail"}}
+  think=h("div",{class:"mar think"},[h("p",{text:T("Thinking…","Sandali…")})]);
+  if(dest)dest.appendChild(think);
+  ensureFaqFil(afterHomeFaq);return {kind:"pending"}}
  var f=h("form",{class:"ask-form",onsubmit:function(e){e.preventDefault();if(inp.value.trim())reply(inp.value.trim())}},[inp,h("button",{class:"btn btn-solid",text:T("Ask","Itanong")})]);
  m.appendChild(chat);m.appendChild(h("p",{class:"ask-tools"},[h("button",{class:"btn btn-outline",text:T("Ask a teacher","Magtanong sa guro"),onclick:teacherCard}),h("button",{class:"btn btn-outline",style:"margin-left:.4rem",text:T("Clear chat","Linisin"),onclick:function(){chat.innerHTML=""}})]));m.appendChild(f);
  window.addEventListener("pagehide",function(){inp.value="";chat.innerHTML=""});
@@ -182,7 +248,7 @@ m.appendChild(h("img",{class:"mar-face",src:"art/mar-avatar.svg",alt:T("Mar, the
 function nextAfter(id){for(var a=0;a<D.modules.length;a++){var it=D.modules[a].items;for(var b=0;b<it.length;b++)if(it[b].id==id)return it[b+1]}}
 if("serviceWorker" in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js",{scope:"./"}).catch(function(){})});
 document.addEventListener("keydown",function(e){if(e.target.tagName=="INPUT"||document.querySelector(".overlay"))return;if(e.key=="ArrowDown"||e.key=="ArrowUp"){var c=[].slice.call(document.querySelectorAll(".choice:not([disabled])"));if(!c.length)return;var i=c.indexOf(document.activeElement);i=e.key=="ArrowDown"?Math.min(c.length-1,i+1):Math.max(0,i-1);c[i].focus();e.preventDefault()}else if(e.key=="ArrowRight"||e.key=="ArrowLeft"){var bs=document.querySelectorAll(".lesson-col .quiz-actions .btn,.step-nav");var want=e.key=="ArrowRight"?/Next|Susunod|Continue|Magpatuloy|Try it|Subukan|Done|Tapos/:/Back|Bumalik/;[].some.call(document.querySelectorAll(".lesson-col .quiz-actions .btn"),function(b){if(want.test(b.textContent)){b.click();return true}})}});
-function privacyFooter(){var f=h("footer",{class:"site-footer"},[h("p",{text:T("Preview only — not for class use yet. Progress stays on this device. This site does not collect names, emails, phone numbers or LRNs. Ask Mar questions aren't saved.","Preview lang — hindi pa para sa klase. Sa device na ito lang ang progress. Hindi kumukuha ang site ng pangalan, email, numero o LRN. Hindi sine-save ang mga tanong kay Ask Mar.")}),h("p",{text:T("This site is hosted on GitHub Pages, which may log visitors' IP addresses. We don't collect anything.","Naka-host ang site na ito sa GitHub Pages, na maaaring mag-log ng IP address ng bisita. Wala kaming kinokolekta.")})]);document.body.appendChild(f)}
+function privacyFooter(){var f=h("footer",{class:"site-footer"},[h("p",{text:T("Preview only — not for class use yet. Progress stays on this device. This site does not collect names, emails, phone numbers or LRNs. Ask Mar questions aren't saved.","Preview lang — hindi pa para sa klase. Sa device na ito lang ang progress. Hindi kumukuha ang site ng pangalan, email, numero o LRN. Hindi sine-save ang mga tanong kay Ask Mar.")}),h("p",{text:T("This site is hosted on GitHub Pages, which may log visitors' IP addresses. We don't collect anything.","Naka-host ang site na ito sa GitHub Pages, na maaaring mag-log ng IP address ng bisita. Wala kaming kinokolekta.")}),h("p",{text:T("Most lessons and other educational content are CC BY-SA 4.0. A few lessons adapted from MIT OpenCourseWare are CC BY-NC-SA 4.0: you may share and adapt them for non-commercial use with credit, but you may not sell them. Each adapted lesson has its own credit line.","CC BY-SA 4.0 ang karamihan ng aralin at iba pang educational content. Ang ilang aralin na hango sa MIT OpenCourseWare ay CC BY-NC-SA 4.0: puwede mo itong i-share at i-adapt para sa di-komersyal na gamit kung may credit, pero hindi mo ito puwedeng ibenta. May sariling credit line ang bawat hango na aralin.")})]);document.body.appendChild(f)}
 document.addEventListener("DOMContentLoaded",function(){mergeFaqFil();document.documentElement.lang=fil?"fil":"en";header();var m=document.getElementById("main");var pg=document.body.dataset.page;(P[pg]||P.home)(m);
  if(pg!="ask"){var side=h("aside",{class:"ask-side","aria-label":"Ask Mar"});document.body.appendChild(side);mountAsk(side);document.body.classList.add("with-ask")}privacyFooter();});
 })();
